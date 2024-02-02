@@ -1,55 +1,69 @@
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import HomeScreen from '../features/home/home.screen';
 import Profile from '../features/profile/profile.screen';
+import FavoritesScreen from '../features/favorites/favorites.screen';
+import NotificationScreen from '../features/notifications/notification.screen';
 
 const Tab = createMaterialBottomTabNavigator();
 const AppDashboard = () => {
   return (
-
-    <Tab.Navigator
-      activeColor="#f00"
-      inactiveColor="grey"
-      screenOptions={{tabBarColor: '#ff0'}}
-      // barStyle={{backgroundColor: '#0df'}}
-      >
+    <NavigationContainer independent={true}>
+      <Tab.Navigator
+        activeColor="#f00"
+        inactiveColor="blue"
+        // style={{ backgroundColor: 'tomato' }}
         
-      <Tab.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        barStyle={{
+          // backgroundColor: '#0df',
+        }}>
+        <Tab.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: 'Trang chủ',
+            tabBarIcon: ({focused}) => {
+              return <Icon name="house" size={16} color={focused? 'red' : "blue"} />;
+            },
+            tabBarColor: '#e70',
+          }}
+        />
+        <Tab.Screen
+          name="Heart"
+          component={FavoritesScreen}
+          options={{
+            tabBarLabel: 'Yêu thích',
+            tabBarIcon: ({focused}) => {
+              return <Icon name="heart" size={16} color={focused? 'red' : "blue"} solid />;
+            },
+            tabBarColor: '#f0f',
+          }}
+        />
+        <Tab.Screen
+        name="Notification"
+        component={NotificationScreen}
         options={{
-          tabBarLabel: 'Home',
-          tabBarIcon(props) {
-            return <Icon name="house" size={16} color={props.color} />;
-          },
-          tabBarColor: '#0df',
-          
-        }}
-      />
-      <Tab.Screen
-        name="Heart"
-        component={Profile}
-        options={{
-          tabBarLabel: 'Favorites',
-          tabBarIcon(props) {
-            return <Icon name="heart" size={16} color={props.color} solid/>;
-          },
-          tabBarColor: '#f0f',
-          
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarLabel: 'Profile',
-          tabBarIcon(props) {
-            return <Icon name="user" size={16} color={props.color} solid />;
+          tabBarLabel: 'Thông báo',
+          tabBarIcon: ({focused}) => {
+            return <Icon name="bell" size={16} color={focused? 'red' : 'blue'} solid/>
           },
         }}
-      />
-    </Tab.Navigator>
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarLabel: 'Hồ sơ',
+            tabBarIcon: ({focused}) => {
+              return <Icon name="user-large" size={16} color={focused? 'red' : "blue"} solid />;
+            },
+            tabBarColor: '#0fe'
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
 
