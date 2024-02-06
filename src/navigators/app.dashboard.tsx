@@ -27,6 +27,7 @@ const AppDashboard = () => {
             tabBarIcon: ({focused}) => {
               return <Icon name="house" size={16} color={focused? 'red' : "blue"} />;
             },
+            
             tabBarColor: '#e70',
           }}
         />
