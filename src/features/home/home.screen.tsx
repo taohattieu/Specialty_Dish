@@ -1,5 +1,5 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
+import React, { useState } from 'react';
 import {TextInput} from 'react-native-paper';
 import App from './../../../App';
 import Icon from 'react-native-vector-icons/EvilIcons';
@@ -12,8 +12,11 @@ const HomeScreen = () => {
           style={{
             textAlign: 'center',
             fontSize: 25,
-            // fontFamily: 'opensans_bold',
-            // fontStyle: 'italic',
+            color: '#090',
+            fontStyle: 'italic',
+            top: 10,
+            fontVariant: ['small-caps'],
+            fontWeight: 'bold',
           }}>
           Specialty Dishes in Viet Nam
         </Text>
@@ -48,36 +51,89 @@ const HomeScreen = () => {
           />
         </View>
       </View>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginHorizontal: 25,
-        }}>
-        <TouchableOpacity>
-          <Image
-            source={require('../../img/hanoi.png')}
-            style={{width: 100, height: 100}}
-          />
-          <Text style={{textAlign: 'center'}}>Hà Nội</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image
-            source={require('../../img/hanoi.png')}
-            style={{width: 100, height: 100}}
-          />
-          <Text style={{textAlign: 'center'}}>Hà Nội</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image
-            source={require('../../img/hanoi.png')}
-            style={{width: 100, height: 100}}
-          />
-          <Text style={{textAlign: 'center'}}>Hà Nội</Text>
-        </TouchableOpacity>
-        
-      </View>
+      <ScrollView>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginHorizontal: 25,
+            marginVertical: 10,
+          }}>
+          <TouchableOpacity>
+            <View
+              style={{
+                borderWidth: 2,
+                borderRadius: 10,
+                borderColor: 'red',
+                // marginRight: 20,
+              }}>
+              <Image
+                source={require('../../img/hanoi.png')}
+                style={{width: 100, height: 100, borderRadius: 8}}
+              />
+            </View>
+            <Text
+              style={{
+                textAlign: 'center',
+                marginVertical: 10,
+                color: 'black',
+                fontSize: 16,
+                // fontWeight: 'bold'
+              }}>
+              Hà Nội
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <View
+              style={{
+                borderWidth: 2,
+                borderRadius: 10,
+                borderColor: 'red',
+                // marginRight: 20,
+              }}>
+              <Image
+                source={require('../../img/hanoi.png')}
+                style={{width: 100, height: 100, borderRadius: 8}}
+              />
+            </View>
+            <Text
+              style={{
+                textAlign: 'center',
+                marginVertical: 10,
+                color: 'black',
+                fontSize: 16,
+                // fontWeight: 'bold'
+              }}>
+              Hà Nội
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <View
+              style={{
+                borderWidth: 2,
+                borderRadius: 10,
+                borderColor: 'red',
+                // marginRight: 20,
+              }}>
+              <Image
+                source={require('../../img/hanoi.png')}
+                style={{width: 100, height: 100, borderRadius: 8}}
+              />
+            </View>
+            <Text
+              style={{
+                textAlign: 'center',
+                marginVertical: 10,
+                color: 'black',
+                fontSize: 16,
+                // fontWeight: 'bold'
+              }}>
+              Hà Nội
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 };

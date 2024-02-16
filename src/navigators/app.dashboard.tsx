@@ -2,10 +2,12 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
+import Icon1 from 'react-native-vector-icons/AntDesign';
 import HomeScreen from '../features/home/home.screen';
 import Profile from '../features/profile/profile.screen';
 import FavoritesScreen from '../features/favorites/favorites.screen';
 import NotificationScreen from '../features/notifications/notification.screen';
+import CommentScreen from '../features/comments/comments.screen';
 
 const Tab = createMaterialBottomTabNavigator();
 const AppDashboard = () => {
@@ -15,19 +17,23 @@ const AppDashboard = () => {
         activeColor="#f00"
         inactiveColor="blue"
         // style={{ backgroundColor: 'tomato' }}
-        
-        barStyle={{
-          // backgroundColor: '#0df',
-        }}>
+
+        barStyle={
+          {
+            // backgroundColor: '#0df',
+          }
+        }>
         <Tab.Screen
           name="HomeScreen"
           component={HomeScreen}
           options={{
             tabBarLabel: 'Trang chủ',
             tabBarIcon: ({focused}) => {
-              return <Icon name="house" size={16} color={focused? 'red' : "blue"} />;
+              return (
+                <Icon name="house" size={16} color={focused ? 'red' : 'blue'} />
+              );
             },
-            
+
             tabBarColor: '#e70',
           }}
         />
@@ -37,20 +43,51 @@ const AppDashboard = () => {
           options={{
             tabBarLabel: 'Yêu thích',
             tabBarIcon: ({focused}) => {
-              return <Icon name="heart" size={16} color={focused? 'red' : "blue"} solid />;
+              return (
+                <Icon
+                  name="heart"
+                  size={16}
+                  color={focused ? 'red' : 'blue'}
+                  solid
+                />
+              );
             },
             tabBarColor: '#f0f',
           }}
         />
         <Tab.Screen
-        name="Notification"
-        component={NotificationScreen}
-        options={{
-          tabBarLabel: 'Thông báo',
-          tabBarIcon: ({focused}) => {
-            return <Icon name="bell" size={16} color={focused? 'red' : 'blue'} solid/>
-          },
-        }}
+          name="comments"
+          component={CommentScreen}
+          options={{
+            tabBarLabel: 'Đóng góp', 
+            tabBarIcon: ({focused}) => {
+              return (
+                <Icon1
+                name='pluscircle'
+                size={18}
+                color={focused ? 'red' : 'blue'}
+                
+                />
+              )
+            }
+          }}
+        />
+        <Tab.Screen
+          name="Notification"
+          component={NotificationScreen}
+          options={{
+            tabBarLabel: 'Thông báo',
+            tabBarIcon: ({focused}) => {
+              return (
+                <Icon
+                  name="bell"
+                  size={16}
+                  color={focused ? 'red' : 'blue'}
+                  solid
+                />
+              );
+            },
+          }}
         />
         <Tab.Screen
           name="Profile"
@@ -58,9 +95,16 @@ const AppDashboard = () => {
           options={{
             tabBarLabel: 'Hồ sơ',
             tabBarIcon: ({focused}) => {
-              return <Icon name="user-large" size={16} color={focused? 'red' : "blue"} solid />;
+              return (
+                <Icon
+                  name="user-large"
+                  size={16}
+                  color={focused ? 'red' : 'blue'}
+                  solid
+                />
+              );
             },
-            tabBarColor: '#0fe'
+            tabBarColor: '#0fe',
           }}
         />
       </Tab.Navigator>
