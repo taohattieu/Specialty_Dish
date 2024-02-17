@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import {TextInput} from 'react-native-paper';
 import App from './../../../App';
 import Icon from 'react-native-vector-icons/EvilIcons';
+import axios from  "axios";
 
-const HomeScreen = () => {
+const HomeScreen =  () => {
+  // const reponse = await axios.get("http://localhost:3000/provinces")
   return (
     <View style={{flex: 1, backgroundColor: '#eda'}}>
       <View style={{justifyContent: 'center'}}>
@@ -68,7 +70,9 @@ const HomeScreen = () => {
                 // marginRight: 20,
               }}>
               <Image
-                source={require('../../img/hanoi.png')}
+
+                source={require('../../img/provinces/hanoi.png')}
+
                 style={{width: 100, height: 100, borderRadius: 8}}
               />
             </View>
@@ -92,7 +96,9 @@ const HomeScreen = () => {
                 // marginRight: 20,
               }}>
               <Image
-                source={require('../../img/hanoi.png')}
+
+                source={require('../../img/provinces/hanoi.png')}
+
                 style={{width: 100, height: 100, borderRadius: 8}}
               />
             </View>
@@ -117,7 +123,9 @@ const HomeScreen = () => {
                 // marginRight: 20,
               }}>
               <Image
-                source={require('../../img/hanoi.png')}
+
+                source={require('../../img/provinces/hanoi.png')}
+
                 style={{width: 100, height: 100, borderRadius: 8}}
               />
             </View>
