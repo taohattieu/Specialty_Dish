@@ -70,7 +70,9 @@ const HomeScreen =  () => {
                 // marginRight: 20,
               }}>
               <Image
+
                 source={require('../../img/provinces/hanoi.png')}
+
                 style={{width: 100, height: 100, borderRadius: 8}}
               />
             </View>
@@ -94,7 +96,9 @@ const HomeScreen =  () => {
                 // marginRight: 20,
               }}>
               <Image
+
                 source={require('../../img/provinces/hanoi.png')}
+
                 style={{width: 100, height: 100, borderRadius: 8}}
               />
             </View>
@@ -119,7 +123,9 @@ const HomeScreen =  () => {
                 // marginRight: 20,
               }}>
               <Image
+
                 source={require('../../img/provinces/hanoi.png')}
+
                 style={{width: 100, height: 100, borderRadius: 8}}
               />
             </View>
