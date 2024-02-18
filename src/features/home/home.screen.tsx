@@ -107,6 +107,7 @@ const HomeScreen = () => {
         renderItem={renderProvinceItem}
         contentContainerStyle={{ marginHorizontal: 25, marginVertical: 10 }}
       />
+
     </View>
   );
 };

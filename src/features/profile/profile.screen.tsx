@@ -1,9 +1,11 @@
+
 import React, {useState} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {Modal} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon2 from  'react-native-vector-icons/FontAwesome';
+
 
 const Profile = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -14,6 +16,7 @@ const Profile = () => {
 
   return (
     <View style={{flex: 1}}>
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -106,6 +109,7 @@ const Profile = () => {
         </View>
       </View>
       <View style={{flex: 1}}></View>
+
     </View>
   );
 };
