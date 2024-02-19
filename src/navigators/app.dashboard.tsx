@@ -3,11 +3,13 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import Icon1 from 'react-native-vector-icons/AntDesign';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from '../features/home/home.screen';
 import Profile from '../features/profile/profile.screen';
-import FavoritesScreen from '../features/favorites/favorites.screen';
+import FavoritesScreen from '../features/comunity/comunity.screen';
 import NotificationScreen from '../features/notifications/notification.screen';
 import CommentScreen from '../features/comments/comments.screen';
+import ComunityScreen from '../features/comunity/comunity.screen';
 
 const Tab = createMaterialBottomTabNavigator();
 const AppDashboard = () => {
@@ -38,17 +40,16 @@ const AppDashboard = () => {
           }}
         />
         <Tab.Screen
-          name="Heart"
-          component={FavoritesScreen}
+          name="Comunity"
+          component={ComunityScreen}
           options={{
-            tabBarLabel: 'Yêu thích',
+            tabBarLabel: 'Cộng đồng',
             tabBarIcon: ({focused}) => {
               return (
-                <Icon
-                  name="heart"
-                  size={16}
+                <Icon2
+                  name="account-group"
+                  size={24}
                   color={focused ? 'red' : 'blue'}
-                  solid
                 />
               );
             },
