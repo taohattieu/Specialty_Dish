@@ -30,9 +30,10 @@ const Profile = () => {
             padding: 20,
             borderTopStartRadius: 25,
             borderTopEndRadius: 25,
-            marginTop: 650,
+            marginTop: 620,
+            height: 150
           }}>
-          <TouchableOpacity style={{marginVertical: 18}}>
+          <TouchableOpacity style={{}}>
             <Icon name="user" size={30} />
             <Text
               style={{
@@ -44,13 +45,14 @@ const Profile = () => {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={{marginVertical: 18}}>
-            <Icon2 name="file-image-o" size={24} style={{left: 5}}/>
+          <TouchableOpacity style={{}}>
+            <Icon2 name="file-image-o" size={24} style={{left: 5, marginTop: 15}}/>
             <Text
               style={{
                 position: 'absolute',
                 marginHorizontal: 30,
                 fontSize: 20,
+                marginTop: 15
               }}>
               Thay đổi ảnh
             </Text>
