@@ -7,12 +7,15 @@ import {
   ScrollView,
   FlatList,
   Dimensions,
+  TextInput,
 } from 'react-native';
-import {TextInput} from 'react-native-paper';
+// import {TextInput} from 'react-native-paper';
+import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import axios from 'axios';
 
 const HomeScreen = () => {
+  const navigation:any = useNavigation();
   const [provinces, setProvinces] = useState<Array<{id: number; name: string}>>(
     [],
   );
@@ -25,7 +28,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
-        const response = await axios.get('http://172.29.16.1:3000/provinces');
+        const response = await axios.get('http://172.30.160.1:3000/provinces');
         setProvinces(response.data);
       } catch (error) {
         console.error('Error fetching provinces:', error);
@@ -50,7 +53,11 @@ const HomeScreen = () => {
   };
 
   const renderProvinceItem = ({item}) => (
-    <TouchableOpacity style={{marginBottom: 20}}>
+    <TouchableOpacity
+      style={{marginBottom: 20}}
+      onPress={() => {
+        navigation.navigate('Specialty');
+      }}>
       <View
         style={{
           borderWidth: 2,
@@ -116,11 +123,13 @@ const HomeScreen = () => {
           <TextInput
             placeholder="Enter to Search"
             style={{
-              height: 25,
+              height: 40,
               width: '80%',
               marginHorizontal: 10,
-              marginVertical: 10,
+              marginVertical: 8,
               backgroundColor: '#fff',
+              color: '#f00',
+              fontSize: 18,
             }}
             onChangeText={handleSearch}
           />
