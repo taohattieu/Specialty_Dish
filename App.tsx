@@ -9,6 +9,8 @@ import {
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import AppDashboard from './src/navigators/app.dashboard';
+import MainStack from './src/navigators/main.stack';
+
 
 const App = () => {
   useEffect(() => {
@@ -21,7 +23,9 @@ const App = () => {
   return (
     <SafeAreaView style={{ flex:1 }}>
       <NavigationContainer>
-        <AppDashboard />
+        {/* <AppDashboard /> */}
+        <MainStack />
+        {/* <AppStack /> */}
       </NavigationContainer>
     </SafeAreaView>
   );

@@ -4,19 +4,21 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppDashboard from './app.dashboard';
 import HomeScreen from '../features/home/home.screen';
 import Profile from '../features/profile/profile.screen';
+import Specialty from '../features/specialty/specialty.screen';
+import DetailsSpecialty from '../features/specialty/details-specialty.screen';
 // import {NavigatorContainer} from '@react-navigation/native'
 
 const Stack = createNativeStackNavigator()
 
 const MainStack = () => {
   return (
-   <SafeAreaView>
-    <Stack.Navigator>
+
+    <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="AppDashboard" component={AppDashboard}/>
-        <Stack.Screen name="HomeScreen" component={HomeScreen}/>
-        <Stack.Screen name="Profile" component={Profile}/>
+        <Stack.Screen name="Specialty" component={Specialty}/>
+        <Stack.Screen name="DetailsSpecialty" component={DetailsSpecialty}/>
     </Stack.Navigator>
-   </SafeAreaView>
+
   );
 };
 

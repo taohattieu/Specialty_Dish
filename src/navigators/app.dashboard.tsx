@@ -10,11 +10,13 @@ import FavoritesScreen from '../features/comunity/comunity.screen';
 import NotificationScreen from '../features/notifications/notification.screen';
 import CommentScreen from '../features/comments/comments.screen';
 import ComunityScreen from '../features/comunity/comunity.screen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Specialty from '../features/specialty/specialty.screen';
 
 const Tab = createMaterialBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 const AppDashboard = () => {
   return (
-    <NavigationContainer independent={true}>
       <Tab.Navigator
         activeColor="#f00"
         inactiveColor="blue"
@@ -40,7 +42,7 @@ const AppDashboard = () => {
           }}
         />
         <Tab.Screen
-          name="Comunity"
+          name="ComunityScreen"
           component={ComunityScreen}
           options={{
             tabBarLabel: 'Cộng đồng',
@@ -109,7 +111,6 @@ const AppDashboard = () => {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 };
 
