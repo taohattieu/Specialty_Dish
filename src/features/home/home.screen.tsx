@@ -28,7 +28,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
-        const response = await axios.get('http://172.30.160.1:3000/provinces');
+        const response = await axios.get('http://172.18.0.1:3000/provinces');
         setProvinces(response.data);
       } catch (error) {
         console.error('Error fetching provinces:', error);
@@ -66,7 +66,7 @@ const HomeScreen = () => {
           marginLeft: 15,
         }}>
         <Image
-          source={require('../../img/provinces/hanoi.png')}
+          source={{uri: item.image}}
           style={{
             width: calculateItemSize(),
             height: calculateItemSize(),
@@ -74,6 +74,7 @@ const HomeScreen = () => {
           }}
         />
       </View>
+      {/* <Text>{item.id}</Text> */}
       <Text
         style={{
           textAlign: 'center',
