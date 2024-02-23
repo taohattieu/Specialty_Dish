@@ -1,4 +1,11 @@
-import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
@@ -9,18 +16,61 @@ import {Image} from 'react-native';
 const Specialty = () => {
   const navigation = useNavigation<any>();
   const [specialties, setSpecialties] = useState();
+  const [provinces, setProvinces] = useState<any>();
 
   useEffect(() => {
     const fetchSpecialty = async () => {
       try {
-        const response = await axios.get('http://172.18.0.1:3000/specialties');
+        const response = await axios.get('http://172.23.64.1:3000/specialties');
         setSpecialties(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error('Error fetching specialty:', error);
       }
     };
     fetchSpecialty();
+    const fetchProvinces = async () => {
+      try {
+        const response = await axios.get('http://172.23.64.1:3000/provinces');
+        const data = response.data;
+        // console.log(data);
+        setProvinces(data.map((province: any) => province.name));
+        console.log(data.map(p => p.name));
+      } catch (error) {
+        console.error('Error fetching provinces: ', error);
+      }
+    };
+    fetchProvinces();
   }, []);
+
+  const renderSpecialtyItem = ({item}) => (
+    <TouchableOpacity
+      style={{marginVertical: 8}}
+      onPress={() => navigation.navigate('DetailsSpecialty')}>
+      <View
+        style={{
+          backgroundColor: '#ddd',
+          flexDirection: 'row',
+          borderWidth: 0.3,
+          borderRadius: 5,
+        }}>
+        <Image
+          source={{uri: 'https://imgur.com/uxRg0TB.png'}}
+          style={{
+            width: '30%',
+            height: 100,
+            marginHorizontal: 8,
+            marginVertical: 8,
+            borderRadius: 8,
+          }}
+        />
+        <View style={{justifyContent: 'space-evenly', marginHorizontal: 16}}>
+          <Text>Name: {item.name}</Text>
+          <Text>Origin: {item.origin}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
   return (
     <>
       <View style={{backgroundColor: '#fda', height: 50}}>
@@ -43,41 +93,16 @@ const Specialty = () => {
             marginLeft: 40,
             marginRight: 20,
           }}>
-          akassjad
+          Name
+          {/* {provinces.name} */}
         </Text>
       </View>
       <View style={{backgroundColor: '#fff', flex: 1}}>
-        <ScrollView>
-          <TouchableOpacity
-            style={{marginVertical: 16, marginHorizontal: 16}}
-            onPress={() => navigation.navigate('DetailsSpecialty')}>
-            <View
-              style={{
-                backgroundColor: '#ddd',
-                flexDirection: 'row',
-                borderWidth: 0.5,
-                borderRadius: 5,
-              }}>
-              <Image
-                source={require('../../img/provinces/hue.jpg')}
-                style={{
-                  width: '30%',
-                  height: 100,
-                  marginHorizontal: 8,
-                  marginVertical: 8,
-                  borderRadius: 8,
-                }}
-              />
-              <View
-                style={{justifyContent: 'space-evenly', marginHorizontal: 20}}>
-                <Text>Id</Text>
-                <Text>Name</Text>
-                <Text>Origin</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-          
-        </ScrollView>
+        <FlatList
+          data={specialties}
+          renderItem={renderSpecialtyItem}
+          contentContainerStyle={{marginHorizontal: 25, marginVertical: 10}}
+        />
       </View>
     </>
   );
