@@ -6,12 +6,11 @@ import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from '../features/home/home.screen';
 import Profile from '../features/profile/profile.screen';
-import FavoritesScreen from '../features/comunity/comunity.screen';
 import NotificationScreen from '../features/notifications/notification.screen';
 import CommentScreen from '../features/comments/comments.screen';
-import ComunityScreen from '../features/comunity/comunity.screen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Specialty from '../features/specialty/specialty.screen';
+import CommunityScreen from '../features/community/community.screen';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -42,8 +41,8 @@ const AppDashboard = () => {
           }}
         />
         <Tab.Screen
-          name="ComunityScreen"
-          component={ComunityScreen}
+          name="CommunityScreen"
+          component={CommunityScreen}
           options={{
             tabBarLabel: 'Cộng đồng',
             tabBarIcon: ({focused}) => {
