@@ -21,7 +21,7 @@ const Specialty = () => {
   useEffect(() => {
     const fetchSpecialty = async () => {
       try {
-        const response = await axios.get('http://172.23.64.1:3000/specialties');
+        const response = await axios.get('http://172.23.16.1:3000/specialties');
         setSpecialties(response.data);
         // console.log(response.data);
       } catch (error) {
@@ -31,7 +31,7 @@ const Specialty = () => {
     fetchSpecialty();
     const fetchProvinces = async () => {
       try {
-        const response = await axios.get('http://172.23.64.1:3000/provinces');
+        const response = await axios.get('http://172.23.16.1:3000/provinces');
         const data = response.data;
         // console.log(data);
         setProvinces(data.map((province: any) => province.name));
@@ -49,13 +49,13 @@ const Specialty = () => {
       onPress={() => navigation.navigate('DetailsSpecialty')}>
       <View
         style={{
-          backgroundColor: '#ddd',
+          backgroundColor: '#fff',
           flexDirection: 'row',
-          borderWidth: 0.3,
+          // borderWidth: 0.3,
           borderRadius: 5,
         }}>
         <Image
-          source={{uri: 'https://imgur.com/uxRg0TB.png'}}
+          source={{uri: item.image}}
           style={{
             width: '30%',
             height: 100,
@@ -93,11 +93,11 @@ const Specialty = () => {
             marginLeft: 40,
             marginRight: 20,
           }}>
-          Name
+          N
           {/* {provinces.name} */}
         </Text>
       </View>
-      <View style={{backgroundColor: '#fff', flex: 1}}>
+      <View style={{ flex: 1}}>
         <FlatList
           data={specialties}
           renderItem={renderSpecialtyItem}
