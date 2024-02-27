@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import AppDashboard from './src/navigators/app.dashboard';
 import MainStack from './src/navigators/main.stack';
+import Login from './src/features/profile/login.screen';
 
 
 const App = () => {
@@ -23,9 +23,8 @@ const App = () => {
   return (
     <SafeAreaView style={{ flex:1 }}>
       <NavigationContainer>
-        {/* <AppDashboard /> */}
         <MainStack />
-        {/* <AppStack /> */}
+        {/* <Login/> */}
       </NavigationContainer>
     </SafeAreaView>
   );

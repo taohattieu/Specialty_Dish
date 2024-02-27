@@ -73,7 +73,7 @@ const Specialty = () => {
   );
   return (
     <>
-      <View style={{backgroundColor: '#fda', height: 50}}>
+      <View style={{backgroundColor: '#fff', height: 50}}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
@@ -93,7 +93,6 @@ const Specialty = () => {
             marginLeft: 40,
             marginRight: 20,
           }}>
-          N
           {/* {provinces.name} */}
         </Text>
       </View>
