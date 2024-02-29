@@ -3,12 +3,43 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon1 from 'react-native-vector-icons/FontAwesome5';
 import Icon2 from 'react-native-vector-icons/Ionicons';
+import Icon3 from 'react-native-vector-icons/MaterialIcons';
+import {TextInput} from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 
 const CommunityScreen = () => {
   return (
     <>
-      <View style={{height: 70, justifyContent: 'center'}}>
-        <Text style={{alignSelf: 'center', fontSize: 24}}>Community</Text>
+      <View
+        style={{
+          // justifyContent: 'center',
+          marginHorizontal: 20,
+          marginVertical: 20,
+          flexDirection: 'row',
+        }}>
+        {/* <Text style={{alignSelf: 'center', fontSize: 24}}>Community</Text> */}
+        <TouchableOpacity style={{borderWidth: 1.5, borderRadius: 50}}>
+          <Image
+            source={require('../../img/provinces/hoian.jpg')}
+            style={{width: 50, height: 50, borderRadius: 50}}
+          />
+        </TouchableOpacity>
+        <TextInput
+          placeholder="Bạn đang nghĩ gì?"
+          style={{
+            backgroundColor: '#fff',
+            marginHorizontal: 10,
+            width: '70%',
+            borderRadius: 8,
+          }}
+        />
+        <TouchableOpacity
+          style={{marginHorizontal: 8, justifyContent: 'center'}}>
+          <Icon2 name="images-outline" size={27} style={{color: '#20d'}} />
+          <Text style={{textAlign: 'center', fontSize: 16, color: '#000'}}>
+            Ảnh
+          </Text>
+        </TouchableOpacity>
       </View>
       <ScrollView>
         <View
@@ -23,8 +54,8 @@ const CommunityScreen = () => {
               <Image
                 source={require('../../img/provinces/hue.jpg')}
                 style={{
-                  width: 50,
-                  height: 50,
+                  width: 55,
+                  height: 55,
                   borderRadius: 50,
                   marginHorizontal: 20,
                   marginVertical: 10,
@@ -50,6 +81,23 @@ const CommunityScreen = () => {
               <Text>12h ago</Text>
             </View>
           </View>
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row-reverse',
+              // backgroundColor: '#f00',
+              position: 'absolute',
+              alignSelf: 'flex-end',
+            }}>
+            <Image
+              source={require('../../img/more-icon.png')}
+              style={{
+                width: 30,
+                height: 30,
+                marginHorizontal: 15,
+                marginVertical: 10,
+              }}
+            />
+          </TouchableOpacity>
           <View
             style={{
               // backgroundColor: '#ff0',
