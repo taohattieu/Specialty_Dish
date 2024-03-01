@@ -17,6 +17,7 @@ const MainStack = () => {
         <Stack.Screen name="AppDashboard" component={AppDashboard}/>
         <Stack.Screen name="Specialty" component={Specialty}/>
         <Stack.Screen name="DetailsSpecialty" component={DetailsSpecialty}/>
+        <Stack.Screen name="Profile" component={Profile}/>
     </Stack.Navigator>
 
   );
