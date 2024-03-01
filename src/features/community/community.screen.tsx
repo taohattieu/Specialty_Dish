@@ -1,45 +1,75 @@
-import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
-import React from 'react';
+import {View, Text, Image, TouchableOpacity, ScrollView, Alert, Modal} from 'react-native';
+import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon1 from 'react-native-vector-icons/FontAwesome5';
 import Icon2 from 'react-native-vector-icons/Ionicons';
-import Icon3 from 'react-native-vector-icons/MaterialIcons';
-import {TextInput} from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
+import {useNavigation} from '@react-navigation/native';
 
 const CommunityScreen = () => {
+  const navigation: any = useNavigation();
+  const [modalVisible, setModalVisible] = useState('false');
+  const [image, setImage] = useState('');
+
+  const chooseImage = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      setImage(image.path);
+    });
+  };
   return (
     <>
       <View
         style={{
-          // justifyContent: 'center',
           marginHorizontal: 20,
           marginVertical: 20,
           flexDirection: 'row',
         }}>
-        {/* <Text style={{alignSelf: 'center', fontSize: 24}}>Community</Text> */}
-        <TouchableOpacity style={{borderWidth: 1.5, borderRadius: 50}}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Profile');
+          }}
+          style={{borderWidth: 1.5, borderRadius: 50, borderColor: 'blue'}}>
           <Image
             source={require('../../img/provinces/hoian.jpg')}
             style={{width: 50, height: 50, borderRadius: 50}}
           />
         </TouchableOpacity>
-        <TextInput
-          placeholder="Bạn đang nghĩ gì?"
+        <TouchableOpacity
           style={{
             backgroundColor: '#fff',
+            flex: 1,
+            borderRadius: 25,
+            justifyContent: 'center',
             marginHorizontal: 10,
-            width: '70%',
-            borderRadius: 8,
-          }}
-        />
+            borderWidth: 0.3,
+            borderColor: 'blue',
+          }}>
+          <Text style={{marginHorizontal: 10}}>Bạn đang nghĩ gì?</Text>
+        </TouchableOpacity>
+
+        {/* chon ảnh từ thư viện */}
         <TouchableOpacity
-          style={{marginHorizontal: 8, justifyContent: 'center'}}>
+          onPress={chooseImage}
+          style={{
+            marginHorizontal: 8,
+            justifyContent: 'center',
+          }}>
           <Icon2 name="images-outline" size={27} style={{color: '#20d'}} />
           <Text style={{textAlign: 'center', fontSize: 16, color: '#000'}}>
             Ảnh
           </Text>
         </TouchableOpacity>
+        <Modal 
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(!modalVisible)}>
+
+        </Modal>
       </View>
       <ScrollView>
         <View
