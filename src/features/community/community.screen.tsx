@@ -1,4 +1,12 @@
-import {View, Text, Image, TouchableOpacity, ScrollView, Alert, Modal} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+  Modal,
+} from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon1 from 'react-native-vector-icons/FontAwesome5';
@@ -8,7 +16,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const CommunityScreen = () => {
   const navigation: any = useNavigation();
-  const [modalVisible, setModalVisible] = useState('false');
+  const [modalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState('');
 
   const chooseImage = () => {
@@ -19,6 +27,9 @@ const CommunityScreen = () => {
     }).then(image => {
       setImage(image.path);
     });
+  };
+  const modalVisibles = () => {
+    setModalVisible(!modalVisible);
   };
   return (
     <>
@@ -39,6 +50,7 @@ const CommunityScreen = () => {
           />
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={modalVisibles}
           style={{
             backgroundColor: '#fff',
             flex: 1,
@@ -63,12 +75,26 @@ const CommunityScreen = () => {
             Ảnh
           </Text>
         </TouchableOpacity>
-        <Modal 
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(!modalVisible)}>
-
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}>
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: '#d0d0d0',
+              marginVertical: 90,
+              borderRadius: 10,
+              marginHorizontal: 8
+            }}>
+            <Text>sdhdj</Text>
+            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+              <Text>Close</Text>
+            </TouchableOpacity>
+          </View>
         </Modal>
       </View>
       <ScrollView>
