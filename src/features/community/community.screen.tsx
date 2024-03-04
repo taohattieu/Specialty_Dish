@@ -5,14 +5,16 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
-  Modal,
 } from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon1 from 'react-native-vector-icons/FontAwesome5';
 import Icon2 from 'react-native-vector-icons/Ionicons';
+import Icon3 from 'react-native-vector-icons/Octicons';
 import ImagePicker from 'react-native-image-crop-picker';
 import {useNavigation} from '@react-navigation/native';
+import {TextInput} from 'react-native';
+import Modal from 'react-native-modal';
 
 const CommunityScreen = () => {
   const navigation: any = useNavigation();
@@ -45,7 +47,7 @@ const CommunityScreen = () => {
           }}
           style={{borderWidth: 1.5, borderRadius: 50, borderColor: 'blue'}}>
           <Image
-            source={require('../../img/provinces/hoian.jpg')}
+            source={require('../../img/provinces/VinhPhuc.jpg')}
             style={{width: 50, height: 50, borderRadius: 50}}
           />
         </TouchableOpacity>
@@ -63,9 +65,8 @@ const CommunityScreen = () => {
           <Text style={{marginHorizontal: 10}}>Bạn đang nghĩ gì?</Text>
         </TouchableOpacity>
 
-        {/* chon ảnh từ thư viện */}
         <TouchableOpacity
-          onPress={chooseImage}
+          onPress={modalVisibles}
           style={{
             marginHorizontal: 8,
             justifyContent: 'center',
@@ -76,24 +77,105 @@ const CommunityScreen = () => {
           </Text>
         </TouchableOpacity>
         <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
+          animationIn={'zoomInUp'}
+          animationOut={'zoomOutDown'}
+          isVisible={modalVisible}
+          onBackdropPress={() => {
             setModalVisible(!modalVisible);
           }}>
           <View
             style={{
-              flex: 1,
-              backgroundColor: '#d0d0d0',
-              marginVertical: 90,
+              backgroundColor: '#fff',
+              marginVertical: 100,
               borderRadius: 10,
-              marginHorizontal: 8
             }}>
-            <Text>sdhdj</Text>
-            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-              <Text>Close</Text>
-            </TouchableOpacity>
+            <View
+              style={{
+                height: 50,
+                borderBottomWidth: 0.3,
+                flexDirection: 'row',
+              }}>
+              <TouchableOpacity
+                onPress={() => setModalVisible(!modalVisible)}
+                style={{
+                  marginHorizontal: 16,
+                  alignSelf: 'center',
+                }}>
+                <Icon name="arrowleft" size={25} color={'red'} />
+              </TouchableOpacity>
+              <Text
+                style={{
+                  flex: 1,
+                  alignSelf: 'center',
+                  fontSize: 18,
+                  fontWeight: 'bold',
+                }}>
+                Tạo bài viết
+              </Text>
+              <TouchableOpacity
+                style={{
+                  flex: 0.5,
+                  alignSelf: 'center',
+                }}>
+                <Text
+                  style={{textAlign: 'center', color: '#54f', fontSize: 18}}>
+                  Cập nhật
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <View
+                style={{
+                  backgroundColor: '#fff',
+                  height: 100,
+                  marginHorizontal: 8,
+                  marginVertical: 10,
+                  borderRadius: 8,
+                  borderWidth: 0.3,
+                }}>
+                <TextInput placeholder="Bạn đang nghĩ gì?" multiline />
+              </View>
+              <View style={{marginVertical: 10, marginHorizontal: 10}}>
+                <Image source={{uri: image}} height={100} width={100} />
+                <TouchableOpacity
+                  onPress={chooseImage}
+                  style={{flexDirection: 'row', marginVertical: 10}}>
+                  <Icon2 name="images-outline" size={24} />
+                  <Text style={{fontSize: 18, marginHorizontal: 10}}>
+                    Thêm ảnh
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{flexDirection: 'row', marginVertical: 10}}>
+                  <Icon3 name="video" size={24} />
+                  <Text style={{fontSize: 18, marginHorizontal: 10}}>
+                    Thêm video
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{flexDirection: 'row', marginVertical: 10}}>
+                  <Icon2 name="location-outline" size={24} />
+                  <Text style={{fontSize: 18, marginHorizontal: 10}}>
+                    Thêm vị trí
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    fontSize: 18,
+                    backgroundColor: '#54f',
+                    color: '#fff',
+                    height: 30,
+                    marginHorizontal: 10,
+                    borderRadius: 8,
+                    marginVertical: 10
+                  }}>
+                  Cập nhật
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </Modal>
       </View>
