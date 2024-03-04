@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity, Modal} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-crop-picker';
+import Modal from 'react-native-modal';
 
 const Profile = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -77,74 +78,74 @@ const Profile = () => {
       </View>
 
       <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(!modalVisible)}>
-        <View
-          style={{
-            backgroundColor: '#ed9',
-            padding: 20,
-            borderTopStartRadius: 25,
-            borderTopEndRadius: 25,
-            marginTop: 620,
-            height: 150,
-          }}>
-          <TouchableOpacity style={{}}>
-            <Icon name="user" size={30} color={'#000'} />
-            <Text
-              style={{
-                position: 'absolute',
-                marginHorizontal: 30,
-                fontSize: 20,
-                color: '#000',
-              }}>
-              {selectedType === 'avatar' ? 'Xem ảnh đại diện' : 'Xem ảnh bìa'}
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{}} onPress={chooseMedia}>
-            <Icon2
-              name="file-image-o"
-              size={24}
-              color={'#000'}
-              style={{left: 5, marginTop: 15}}
-            />
-            <Text
-              style={{
-                position: 'absolute',
-                marginHorizontal: 30,
-                fontSize: 20,
-                marginTop: 15,
-                color: '#000',
-              }}>
-              {selectedType === 'avatar'
-                ? 'Thay đổi ảnh đại diện'
-                : 'Thay đổi ảnh bìa'}
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => setModalVisible(!modalVisible)}
+        animationIn={'zoomInUp'}
+        animationOut={'zoomOutDown'}
+        isVisible={modalVisible}
+        onBackdropPress={() => setModalVisible(!modalVisible)}>
+        <View style={{}}>
+          <View
             style={{
-              backgroundColor: '#45f',
-              width: 80,
-              height: 35,
-              borderRadius: 8,
-              alignSelf: 'flex-end',
-              marginHorizontal: 20,
+              backgroundColor: '#ed9',
+              padding: 20,
+              borderRadius: 10,
+              height: 150,
             }}>
-            <Text
+            <TouchableOpacity style={{}}>
+              <Icon name="user" size={30} color={'#000'} />
+              <Text
+                style={{
+                  position: 'absolute',
+                  marginHorizontal: 30,
+                  fontSize: 20,
+                  color: '#000',
+                }}>
+                {selectedType === 'avatar' ? 'Xem ảnh đại diện' : 'Xem ảnh bìa'}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={{}} onPress={chooseMedia}>
+              <Icon2
+                name="file-image-o"
+                size={24}
+                color={'#000'}
+                style={{left: 5, marginTop: 15}}
+              />
+              <Text
+                style={{
+                  position: 'absolute',
+                  marginHorizontal: 30,
+                  fontSize: 20,
+                  marginTop: 15,
+                  color: '#000',
+                }}>
+                {selectedType === 'avatar'
+                  ? 'Thay đổi ảnh đại diện'
+                  : 'Thay đổi ảnh bìa'}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => setModalVisible(!modalVisible)}
               style={{
-                textAlign: 'center',
-                top: 5,
-                fontSize: 16,
-                fontWeight: 'bold',
-                color: '#fff',
+                backgroundColor: '#45f',
+                width: 80,
+                height: 35,
+                borderRadius: 8,
+                alignSelf: 'flex-end',
+                marginHorizontal: 20,
               }}>
-              Close
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={{
+                  textAlign: 'center',
+                  top: 5,
+                  fontSize: 16,
+                  fontWeight: 'bold',
+                  color: '#fff',
+                }}>
+                Close
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
     </View>

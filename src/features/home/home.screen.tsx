@@ -27,7 +27,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
-        const response = await axios.get('http://172.23.16.1:3000/provinces');
+        const response = await axios.get('http://172.31.0.1:3000/provinces');
         setProvinces(response.data);
       } catch (error) {
         console.error('Error fetching provinces:', error);
@@ -113,7 +113,7 @@ const HomeScreen = () => {
           marginVertical: 10,
           backgroundColor: '#fff',
         }}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', height: 50}}>
           <Icon
             name="search"
             size={30}
