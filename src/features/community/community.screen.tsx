@@ -170,7 +170,7 @@ const CommunityScreen = () => {
                     height: 30,
                     marginHorizontal: 10,
                     borderRadius: 8,
-                    marginVertical: 10
+                    marginVertical: 10,
                   }}>
                   Cập nhật
                 </Text>
@@ -257,62 +257,62 @@ const CommunityScreen = () => {
             </TouchableOpacity>
           </View>
           <View style={{flexDirection: 'row'}}>
-            <View
-              style={{
-                backgroundColor: '#ddd',
-                marginHorizontal: 20,
-                marginVertical: 10,
-                flexDirection: 'row',
-                // borderWidth: 0.3,
-                borderRadius: 8,
-                width: '25%',
-                height: 30,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 16}}>10k </Text>
-              <TouchableOpacity style={{}}>
+            <TouchableOpacity style={{width: '25%', flex: 1}}>
+              <View
+                style={{
+                  backgroundColor: '#ddd',
+                  marginHorizontal: 10,
+                  marginVertical: 10,
+                  flexDirection: 'row',
+                  // borderWidth: 0.3,
+                  borderRadius: 25,
+                  height: 40,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 <Icon name="hearto" size={18} />
-              </TouchableOpacity>
-            </View>
 
-            <View
-              style={{
-                backgroundColor: '#ddd',
-                flexDirection: 'row',
-                marginHorizontal: 10,
-                marginVertical: 10,
-                // borderWidth: 0.3,
-                borderRadius: 8,
-                width: '25%',
-                height: 30,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 16}}>1.5k </Text>
-              <TouchableOpacity>
+                <Text style={{fontSize: 16, marginLeft: 10}}>10k </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={{width: '25%', flex: 1}}>
+              <View
+                style={{
+                  backgroundColor: '#ddd',
+                  flexDirection: 'row',
+                  marginHorizontal: 10,
+                  marginVertical: 10,
+                  // borderWidth: 0.3,
+                  borderRadius: 25,
+                  height: 40,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  // borderLeftWidth: 0.5,
+                }}>
                 <Icon1 name="comment-alt" size={18} />
-              </TouchableOpacity>
-            </View>
 
-            <View
-              style={{
-                backgroundColor: '#ddd',
-                flexDirection: 'row',
-                marginHorizontal: 10,
-                marginVertical: 10,
-                // borderWidth: 0.3,
-                borderRadius: 8,
-                width: '25%',
-                height: 30,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 16}}>12k </Text>
-              <TouchableOpacity>
+                <Text style={{fontSize: 16, marginLeft: 10}}>1.5k </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={{width: '25%', flex: 1}}>
+              <View
+                style={{
+                  backgroundColor: '#ddd',
+                  flexDirection: 'row',
+                  marginHorizontal: 10,
+                  marginVertical: 10,
+                  // borderWidth: 0.3,
+                  borderRadius: 25,
+                  height: 40,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  // borderLeftWidth: 0.5,
+                }}>
                 <Icon2 name="arrow-redo-sharp" size={24} />
-              </TouchableOpacity>
-            </View>
+
+                <Text style={{fontSize: 16, marginLeft: 10}}>12k </Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
