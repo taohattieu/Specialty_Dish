@@ -21,7 +21,7 @@ const Specialty = () => {
   useEffect(() => {
     const fetchSpecialty = async () => {
       try {
-        const response = await axios.get('http://172.31.0.1:3000/specialties');
+        const response = await axios.get('http://172.21.0.1:3000/specialties');
         setSpecialties(response.data);
         // console.log(response.data);
       } catch (error) {
@@ -31,12 +31,12 @@ const Specialty = () => {
     fetchSpecialty();
     const fetchProvinces = async () => {
       try {
-        const response = await axios.get('http://172.31.0.1:3000/provinces');
+        const response = await axios.get('http://172.21.0.1:3000/provinces');
         const data = response.data;
         // console.log(data);
         const name = data.map((province: any) => province.name);
         setProvinces({
-          name
+          name: name,
         });
         console.log(name);
       } catch (error) {
@@ -96,7 +96,7 @@ const Specialty = () => {
             marginLeft: 40,
             marginRight: 20,
           }}>
-          {provinces?.name[1]}
+          {provinces?.name}
         </Text>
       </View>
       <View style={{flex: 1}}>

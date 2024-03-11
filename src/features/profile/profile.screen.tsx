@@ -128,11 +128,12 @@ const Profile = () => {
               onPress={() => setModalVisible(!modalVisible)}
               style={{
                 backgroundColor: '#45f',
-                width: 80,
+                width: 70,
                 height: 35,
                 borderRadius: 8,
                 alignSelf: 'flex-end',
-                marginHorizontal: 20,
+                marginHorizontal: 8,
+                marginVertical: 10
               }}>
               <Text
                 style={{
