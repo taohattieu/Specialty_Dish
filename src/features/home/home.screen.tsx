@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import axios from 'axios';
 
 const HomeScreen = () => {
-  const navigation:any = useNavigation();
+  const navigation: any = useNavigation();
   const [provinces, setProvinces] = useState<Array<{id: number; name: string}>>(
     [],
   );
@@ -27,7 +27,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
-        const response = await axios.get('http://172.21.0.1:3000/provinces');
+        const response = await axios.get('http://172.22.160.1:3000/provinces');
         setProvinces(response.data);
       } catch (error) {
         console.error('Error fetching provinces:', error);
@@ -51,11 +51,12 @@ const HomeScreen = () => {
     setFilteredProvinces(filtered);
   };
 
-  const renderProvinceItem = ({item}) => (
+  const renderProvinceItem = ({item}: any) => (
     <TouchableOpacity
       style={{marginBottom: 20}}
       onPress={() => {
-        navigation.navigate('Specialty');
+        // navigation.navigate('Specialty');
+        navigation.navigate('Specialty', {provinceName: item.name});
       }}>
       <View
         style={{
@@ -137,7 +138,7 @@ const HomeScreen = () => {
       </View>
       <FlatList
         data={filteredProvinces.length > 0 ? filteredProvinces : provinces}
-        keyExtractor={item => item.id.toString()}
+        // keyExtractor={item => item.id.toString()}
         numColumns={2}
         renderItem={renderProvinceItem}
         contentContainerStyle={{marginHorizontal: 25, marginVertical: 10}}

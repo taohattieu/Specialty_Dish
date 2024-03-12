@@ -19,7 +19,7 @@ import Modal from 'react-native-modal';
 const CommunityScreen = () => {
   const navigation: any = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState('https://imgur.com/l8rDcuY.png');
 
   const chooseImage = () => {
     ImagePicker.openPicker({
