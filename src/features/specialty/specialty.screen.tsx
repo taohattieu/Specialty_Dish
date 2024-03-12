@@ -8,45 +8,51 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import DetailsSpecialty from './details-specialty.screen';
 import axios from 'axios';
 import {Image} from 'react-native';
 
 const Specialty = () => {
   const navigation = useNavigation<any>();
+  const route = useRoute();
   const [specialties, setSpecialties] = useState();
   const [provinces, setProvinces] = useState<any>();
+  const [selectedProvince, setSelectedProvince] = useState('');
+
+  interface routeParams {
+    provinceName?: string;
+  }
 
   useEffect(() => {
-    const fetchSpecialty = async () => {
+    const params = route.params as routeParams;
+    const provinceName = params?.provinceName ?? '';
+    setSelectedProvince(provinceName);
+    const fetchSpecialties = async () => {
       try {
-        const response = await axios.get('http://172.21.0.1:3000/specialties');
-        setSpecialties(response.data);
-        // console.log(response.data);
+        const specialtiesResponse = await axios.get(
+          'http://172.22.160.1:3000/specialties',
+        );
+        setSpecialties(specialtiesResponse.data);
       } catch (error) {
-        console.error('Error fetching specialty:', error);
+        console.error('Error fetching specialties:', error);
       }
     };
-    fetchSpecialty();
-    const fetchProvinces = async () => {
-      try {
-        const response = await axios.get('http://172.21.0.1:3000/provinces');
-        const data = response.data;
-        // console.log(data);
-        const name = data.map((province: any) => province.name);
-        setProvinces({
-          name: name,
-        });
-        console.log(name);
-      } catch (error) {
-        console.error('Error fetching provinces: ', error);
-      }
-    };
-    fetchProvinces();
-  }, []);
+    fetchSpecialties();
+    // const fetchProvinces = async () => {
+    //   try {
+    //     const provincesResponse = await axios.get(
+    //       'http://172.22.160.1:3000/provinces',
+    //     );
+    //     setProvinces(provincesResponse.data);
+    //   } catch (error) {
+    //     console.error('Error fetching provinces: ', error);
+    //   }
+    // };
+    // fetchProvinces();
+  }, [navigation]);
 
-  const renderSpecialtyItem = ({item}) => (
+  const renderSpecialtyItem = ({item}: any) => (
     <TouchableOpacity
       style={{marginVertical: 8}}
       onPress={() => navigation.navigate('DetailsSpecialty')}>
@@ -67,16 +73,37 @@ const Specialty = () => {
             borderRadius: 8,
           }}
         />
-        <View style={{justifyContent: 'space-evenly', marginHorizontal: 16}}>
+        <View
+          style={{
+            justifyContent: 'space-evenly',
+            marginLeft: 16,
+          }}>
           <Text>Name: {item.name}</Text>
           <Text>Origin: {item.origin}</Text>
+          <Text style={{}}>Description: {item.description}</Text>
         </View>
       </View>
     </TouchableOpacity>
   );
   return (
     <>
-      <View style={{backgroundColor: '#fff', height: 50}}>
+      <View
+        style={{
+          backgroundColor: '#fff',
+          height: 50,
+          justifyContent: 'center',
+        }}>
+          <Text
+          style={{
+            fontSize: 24,
+            textAlign: 'center',
+            color: '#f00',
+            // backgroundColor: '#ff0'
+            // fontVariant: ['small-caps'],
+            // fontWeight: 'bold',
+          }}>
+          {selectedProvince}
+        </Text>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
@@ -85,19 +112,11 @@ const Specialty = () => {
             marginHorizontal: 10,
             marginVertical: 10,
             position: 'absolute',
+            // backgroundColor: '#065'
           }}>
           <Icon name="left" size={26} style={{color: '#f00'}} />
         </TouchableOpacity>
-        <Text
-          style={{
-            fontSize: 24,
-            marginVertical: 5,
-            textAlign: 'center',
-            marginLeft: 40,
-            marginRight: 20,
-          }}>
-          {provinces?.name}
-        </Text>
+        
       </View>
       <View style={{flex: 1}}>
         <FlatList
