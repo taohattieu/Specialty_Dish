@@ -4,7 +4,7 @@ import React from 'react'
 const DetailsSpecialty = () => {
   return (
     <View>
-      <Text>DetailsSpecialty</Text>
+      <Text style={{color: '#696969'}}>DetailsSpecialty</Text>
     </View>
   )
 }

@@ -62,7 +62,7 @@ const CommunityScreen = () => {
             borderWidth: 0.3,
             borderColor: 'blue',
           }}>
-          <Text style={{marginHorizontal: 10}}>Bạn đang nghĩ gì?</Text>
+          <Text style={{marginHorizontal: 10, color: '#696969'}}>Bạn đang nghĩ gì?</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -109,6 +109,7 @@ const CommunityScreen = () => {
                   alignSelf: 'center',
                   fontSize: 18,
                   fontWeight: 'bold',
+                  color: '#696969'
                 }}>
                 Tạo bài viết
               </Text>
@@ -133,29 +134,29 @@ const CommunityScreen = () => {
                   borderRadius: 8,
                   borderWidth: 0.3,
                 }}>
-                <TextInput placeholder="Bạn đang nghĩ gì?" multiline />
+                <TextInput placeholder="Bạn đang nghĩ gì?" multiline placeholderTextColor={'#696969'}/>
               </View>
               <View style={{marginVertical: 10, marginHorizontal: 10}}>
                 <Image source={{uri: image}} height={100} width={100} />
                 <TouchableOpacity
                   onPress={chooseImage}
                   style={{flexDirection: 'row', marginVertical: 10}}>
-                  <Icon2 name="images-outline" size={24} />
-                  <Text style={{fontSize: 18, marginHorizontal: 10}}>
+                  <Icon2 name="images-outline" size={24} color={'#696969'}/>
+                  <Text style={{fontSize: 18, marginHorizontal: 10, color: '#696969'}}>
                     Thêm ảnh
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{flexDirection: 'row', marginVertical: 10}}>
-                  <Icon3 name="video" size={24} />
-                  <Text style={{fontSize: 18, marginHorizontal: 10}}>
+                  <Icon3 name="video" size={24} color={'#696969'}/>
+                  <Text style={{fontSize: 18, marginHorizontal: 10, color: '#696969'}}>
                     Thêm video
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{flexDirection: 'row', marginVertical: 10}}>
-                  <Icon2 name="location-outline" size={24} />
-                  <Text style={{fontSize: 18, marginHorizontal: 10}}>
+                  <Icon2 name="location-outline" size={24} color={'#696969'}/>
+                  <Text style={{fontSize: 18, marginHorizontal: 10, color: '#696969'}}>
                     Thêm vị trí
                   </Text>
                 </TouchableOpacity>
@@ -216,7 +217,7 @@ const CommunityScreen = () => {
                   User Name
                 </Text>
               </TouchableOpacity>
-              <Text>12h ago</Text>
+              <Text style={{color: '#696969'}}>12h ago</Text>
             </View>
           </View>
           <TouchableOpacity
@@ -241,7 +242,7 @@ const CommunityScreen = () => {
               // backgroundColor: '#ff0',
               marginHorizontal: 16,
             }}>
-            <Text style={{fontSize: 16}}>Hello</Text>
+            <Text style={{fontSize: 16, color: '#696969'}}>Hello</Text>
           </View>
           <View>
             <TouchableOpacity>
@@ -270,9 +271,9 @@ const CommunityScreen = () => {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Icon name="hearto" size={18} />
+                <Icon name="hearto" size={18} color={'#696969'}/>
 
-                <Text style={{fontSize: 16, marginLeft: 10}}>10k </Text>
+                <Text style={{fontSize: 16, marginLeft: 10,color: '#696969'}}>10k </Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={{width: '25%', flex: 1}}>
@@ -289,9 +290,9 @@ const CommunityScreen = () => {
                   alignItems: 'center',
                   // borderLeftWidth: 0.5,
                 }}>
-                <Icon1 name="comment-alt" size={18} />
+                <Icon1 name="comment-alt" size={18} color={'#696969'}/>
 
-                <Text style={{fontSize: 16, marginLeft: 10}}>1.5k </Text>
+                <Text style={{fontSize: 16, marginLeft: 10, color: '#696969'}}>1.5k </Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={{width: '25%', flex: 1}}>
@@ -308,9 +309,9 @@ const CommunityScreen = () => {
                   alignItems: 'center',
                   // borderLeftWidth: 0.5,
                 }}>
-                <Icon2 name="arrow-redo-sharp" size={24} />
+                <Icon2 name="arrow-redo-sharp" size={24} color={'#696969'}/>
 
-                <Text style={{fontSize: 16, marginLeft: 10}}>12k </Text>
+                <Text style={{fontSize: 16, marginLeft: 10, color: '#696969'}}>12k </Text>
               </View>
             </TouchableOpacity>
           </View>
