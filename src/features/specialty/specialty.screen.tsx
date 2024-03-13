@@ -31,7 +31,7 @@ const Specialty = () => {
     const fetchSpecialties = async () => {
       try {
         const specialtiesResponse = await axios.get(
-          'http://172.22.160.1:3000/specialties',
+          'https://zgnj25mm-3000.asse.devtunnels.ms/specialties',
         );
         setSpecialties(specialtiesResponse.data);
       } catch (error) {
@@ -78,9 +78,9 @@ const Specialty = () => {
             justifyContent: 'space-evenly',
             marginLeft: 16,
           }}>
-          <Text>Name: {item.name}</Text>
-          <Text>Origin: {item.origin}</Text>
-          <Text style={{}}>Description: {item.description}</Text>
+          <Text style={{color: '#696969'}}>Name: {item.name}</Text>
+          <Text style={{color: '#696969'}}>Origin: {item.origin}</Text>
+          <Text style={{color: '#696969'}}>Description: {item.description}</Text>
         </View>
       </View>
     </TouchableOpacity>

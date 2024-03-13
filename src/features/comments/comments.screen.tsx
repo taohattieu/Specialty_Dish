@@ -4,7 +4,7 @@ import React from 'react'
 const CommentScreen = () => {
   return (
     <View>
-      <Text>comments</Text>
+      <Text style={{color: '#696969'}}>comments</Text>
     </View>
   )
 }

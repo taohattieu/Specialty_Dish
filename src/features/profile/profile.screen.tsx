@@ -84,8 +84,8 @@ const Profile = () => {
         </View>
 
         <View style={{flex: 0.3}}>
-          <Text>User Name</Text>
-          <Text>Nick Name</Text>
+          <Text style={{color: '#696969'}}>User Name</Text>
+          <Text style={{color: '#696969'}}>Nick Name</Text>
         </View>
 
         <Modal
@@ -165,7 +165,7 @@ const Profile = () => {
       </View>
       
       <View style={{flex: 1}}>
-        <Text>sạdjsadhskad</Text>
+        <Text style={{color: '#696969'}}>sạdjsadhskad</Text>
       </View>
     </>
   );

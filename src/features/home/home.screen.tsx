@@ -27,7 +27,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
-        const response = await axios.get('http://172.22.160.1:3000/provinces');
+        const response = await axios.get('https://zgnj25mm-3000.asse.devtunnels.ms/provinces');
         setProvinces(response.data);
       } catch (error) {
         console.error('Error fetching provinces:', error);
@@ -102,7 +102,7 @@ const HomeScreen = () => {
           }}>
           Specialty Dishes in Viet Nam
         </Text>
-        <Text style={{textAlign: 'center', marginTop: 20}}>
+        <Text style={{textAlign: 'center', marginTop: 20, color: '#696969'}}>
           Search or Select in province
         </Text>
       </View>
@@ -123,6 +123,7 @@ const HomeScreen = () => {
           />
           <TextInput
             placeholder="Enter to Search"
+            placeholderTextColor={'#696969'}
             style={{
               height: 40,
               width: '80%',
