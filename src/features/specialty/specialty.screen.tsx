@@ -90,8 +90,9 @@ const Specialty = () => {
       <View
         style={{
           backgroundColor: '#fff',
-          height: 50,
+          height: 70,
           justifyContent: 'center',
+          borderBottomWidth: 0.3
         }}>
           <Text
           style={{

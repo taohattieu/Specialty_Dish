@@ -88,7 +88,7 @@ const HomeScreen = () => {
   );
 
   return (
-    <View style={{flex: 1, backgroundColor: '##fce7a8'}}>
+    <View style={{flex: 1, backgroundColor: '#fce7a8'}}>
       <View style={{justifyContent: 'center'}}>
         <Text
           style={{
