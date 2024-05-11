@@ -5,12 +5,13 @@ import Icon from 'react-native-vector-icons/FontAwesome6';
 import Icon1 from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from '../features/home/home.screen';
-import Profile from '../features/profile/profile.screen';
+import Profile from '../features/user/profile.screen';
 import NotificationScreen from '../features/notifications/notification.screen';
-import CommentScreen from '../features/comments/comments.screen';
+import CommentScreen from '../features/favorites/comments.screen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Specialty from '../features/specialty/specialty.screen';
 import CommunityScreen from '../features/community/community.screen';
+import FavoritesScreen from '../features/favorites/comments.screen';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -58,14 +59,14 @@ const AppDashboard = () => {
           }}
         />
         <Tab.Screen
-          name="comments"
-          component={CommentScreen}
+          name="favorites"
+          component={FavoritesScreen}
           options={{
-            tabBarLabel: 'Đóng góp', 
+            tabBarLabel: 'Yêu thích', 
             tabBarIcon: ({focused}) => {
               return (
                 <Icon1
-                name='pluscircle'
+                name='heart'
                 size={18}
                 color={focused ? 'red' : 'blue'}
                 

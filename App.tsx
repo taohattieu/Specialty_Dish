@@ -9,7 +9,7 @@ import {
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import MainStack from './src/navigators/main.stack';
-import Login from './src/features/profile/login.screen';
+import Login from './src/features/user/login.screen';
 
 
 const App = () => {
