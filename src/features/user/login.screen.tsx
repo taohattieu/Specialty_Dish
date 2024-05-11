@@ -42,7 +42,7 @@ const Login = () => {
       await AsyncStorage.setItem('userToken', response.data.accessToken);
       navigation.navigate('AppDashboard');
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       Alert.alert('Lỗi', 'Email hoặc Password không chính xác!');
     }
   };
@@ -168,9 +168,11 @@ const Login = () => {
                 marginHorizontal: 10,
                 justifyContent: 'flex-end',
               }}>
+                <TouchableOpacity onPress={() => navigation.navigate('AppDashboard')}>
               <Text style={{fontSize: 18, fontStyle: 'italic'}}>
                 Bạn chưa có tài khoản?{' '}
               </Text>
+              </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate('Register');
