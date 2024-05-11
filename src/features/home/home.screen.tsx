@@ -27,7 +27,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
-        const response = await axios.get('https://zgnj25mm-3000.asse.devtunnels.ms/provinces');
+        const response = await axios.get('https://zgnj25mm-8080.asse.devtunnels.ms/province');
         setProvinces(response.data);
       } catch (error) {
         console.error('Error fetching provinces:', error);
@@ -88,7 +88,7 @@ const HomeScreen = () => {
   );
 
   return (
-    <View style={{flex: 1, backgroundColor: '#eda'}}>
+    <View style={{flex: 1, backgroundColor: '##fce7a8'}}>
       <View style={{justifyContent: 'center'}}>
         <Text
           style={{

@@ -31,7 +31,7 @@ const Specialty = () => {
     const fetchSpecialties = async () => {
       try {
         const specialtiesResponse = await axios.get(
-          'https://zgnj25mm-3000.asse.devtunnels.ms/specialties',
+          'https://zgnj25mm-8080.asse.devtunnels.ms/specialty',
         );
         setSpecialties(specialtiesResponse.data);
       } catch (error) {
