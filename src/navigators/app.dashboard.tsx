@@ -7,11 +7,11 @@ import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from '../features/home/home.screen';
 import Profile from '../features/user/profile.screen';
 import NotificationScreen from '../features/notifications/notification.screen';
-import CommentScreen from '../features/favorites/comments.screen';
+import CommentScreen from '../features/favorites/favorites.screen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Specialty from '../features/specialty/specialty.screen';
 import CommunityScreen from '../features/community/community.screen';
-import FavoritesScreen from '../features/favorites/comments.screen';
+import FavoritesScreen from '../features/favorites/favorites.screen';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
