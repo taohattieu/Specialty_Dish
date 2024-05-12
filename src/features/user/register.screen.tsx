@@ -85,10 +85,10 @@ const Register = () => {
       <View
         style={{
           borderWidth: 0.3,
-          borderRadius: 10,
+          borderRadius: 8,
           marginVertical: 10,
           marginHorizontal: 10,
-          backgroundColor: '#ffffff',
+          backgroundColor: '#fffaf0',
           width: '95%',
           position: 'absolute',
         }}>

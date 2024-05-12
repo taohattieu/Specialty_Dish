@@ -1,37 +1,31 @@
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
-  ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
+  Image,
+  AsyncStorage,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import DetailsSpecialty from './details-specialty.screen';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
-import {Image} from 'react-native';
 
 const Specialty = () => {
   const navigation = useNavigation<any>();
   const route = useRoute();
-  const [specialties, setSpecialties] = useState();
-  const [provinces, setProvinces] = useState<any>();
+  const [specialties, setSpecialties] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState('');
-
-  interface routeParams {
-    provinceName?: string;
-  }
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    const params = route.params as routeParams;
+    const params = route.params;
     const provinceName = params?.provinceName ?? '';
     setSelectedProvince(provinceName);
     const fetchSpecialties = async () => {
       try {
         const specialtiesResponse = await axios.get(
-          'https://zgnj25mm-8080.asse.devtunnels.ms/specialty',
+          'https://zgnj25mm-8080.asse.devtunnels.ms/specialty'
         );
         setSpecialties(specialtiesResponse.data);
       } catch (error) {
@@ -39,32 +33,60 @@ const Specialty = () => {
       }
     };
     fetchSpecialties();
-    // const fetchProvinces = async () => {
-    //   try {
-    //     const provincesResponse = await axios.get(
-    //       'http://172.22.160.1:3000/provinces',
-    //     );
-    //     setProvinces(provincesResponse.data);
-    //   } catch (error) {
-    //     console.error('Error fetching provinces: ', error);
-    //   }
-    // };
-    // fetchProvinces();
+    // Load favorites from storage
+    loadFavorites();
   }, [navigation]);
 
-  const renderSpecialtyItem = ({item}: any) => (
+  const loadFavorites = async () => {
+    try {
+      const favoritesString = await AsyncStorage.getItem('favorites');
+      if (favoritesString !== null) {
+        setFavorites(JSON.parse(favoritesString));
+      }
+    } catch (error) {
+      console.error('Error loading favorites:', error);
+    }
+  };
+
+  const saveFavorites = async () => {
+    try {
+      await AsyncStorage.setItem('favorites', JSON.stringify(favorites));
+    } catch (error) {
+      console.error('Error saving favorites:', error);
+    }
+  };
+
+  const toggleFavorite = (item: any) => {
+    const index = favorites.findIndex((fav) => fav.id === item.id);
+    if (index !== -1) {
+      // If already favorited, remove it
+      const updatedFavorites = [...favorites];
+      updatedFavorites.splice(index, 1);
+      setFavorites(updatedFavorites);
+    } else {
+      // Otherwise, add it to favorites
+      setFavorites([...favorites, item]);
+    }
+  };
+
+  const isFavorite = (item) => {
+    return favorites.some((fav) => fav.id === item.id);
+  };
+
+  const renderSpecialtyItem = ({ item }) => (
     <TouchableOpacity
-      style={{marginVertical: 8}}
-      onPress={() => navigation.navigate('DetailsSpecialty')}>
+      style={{ marginVertical: 8 }}
+      onPress={() =>
+        navigation.navigate('DetailsSpecialty', { specialty: item })
+      }>
       <View
         style={{
           backgroundColor: '#fff',
           flexDirection: 'row',
-          // borderWidth: 0.3,
           borderRadius: 5,
         }}>
         <Image
-          source={{uri: item.image}}
+          source={{ uri: item.image }}
           style={{
             width: '30%',
             height: 100,
@@ -73,18 +95,29 @@ const Specialty = () => {
             borderRadius: 8,
           }}
         />
-        <View
-          style={{
-            justifyContent: 'space-evenly',
-            marginLeft: 16,
-          }}>
-          <Text style={{color: '#696969'}}>Name: {item.name}</Text>
-          <Text style={{color: '#696969'}}>Origin: {item.origin}</Text>
-          <Text style={{color: '#696969'}}>Description: {item.description}</Text>
+        <View style={{ justifyContent: 'space-evenly', marginLeft: 16 }}>
+          <Text style={{ color: '#696969' }}>Name: {item.name}</Text>
+          <Text style={{ color: '#696969' }}>Origin: {item.origin}</Text>
+          <Text style={{ color: '#696969' }}>
+            Description: {item.description}
+          </Text>
+          <TouchableOpacity onPress={() => toggleFavorite(item)}>
+            <Icon
+              name={isFavorite(item) ? 'heart' : 'hearto'}
+              size={24}
+              color={isFavorite(item) ? '#f00' : '#696969'}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableOpacity>
   );
+
+  // Call saveFavorites whenever favorites change
+  useEffect(() => {
+    saveFavorites();
+  }, [favorites]);
+
   return (
     <>
       <View
@@ -92,16 +125,13 @@ const Specialty = () => {
           backgroundColor: '#fff',
           height: 70,
           justifyContent: 'center',
-          borderBottomWidth: 0.3
+          borderBottomWidth: 0.3,
         }}>
-          <Text
+        <Text
           style={{
             fontSize: 24,
             textAlign: 'center',
             color: '#f00',
-            // backgroundColor: '#ff0'
-            // fontVariant: ['small-caps'],
-            // fontWeight: 'bold',
           }}>
           {selectedProvince}
         </Text>
@@ -113,20 +143,19 @@ const Specialty = () => {
             marginHorizontal: 10,
             marginVertical: 10,
             position: 'absolute',
-            // backgroundColor: '#065'
           }}>
-          <Icon name="left" size={26} style={{color: '#f00'}} />
+          <Icon name="left" size={26} style={{ color: '#f00' }} />
         </TouchableOpacity>
-        
       </View>
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <FlatList
           data={specialties}
           renderItem={renderSpecialtyItem}
-          contentContainerStyle={{marginHorizontal: 25, marginVertical: 10}}
+          contentContainerStyle={{ marginHorizontal: 25, marginVertical: 10 }}
         />
       </View>
     </>
   );
 };
+
 export default Specialty;
