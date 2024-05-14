@@ -22,6 +22,9 @@ const Register = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [address, setAddress] = useState('');
+  const [avatar, setAvatar] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [showPersonalInfo, setShowPersonalInfo] = useState(false);
   const [showUsernamePassword, setShowUsernamePassword] = useState(true);
 
@@ -53,6 +56,9 @@ const Register = () => {
             firstName: firstName,
             lastName: lastName,
             address: address,
+            avatar: avatar,
+            email: email,
+            phone: phone,
           },
           {
             headers: {
@@ -164,34 +170,75 @@ const Register = () => {
                   zIndex: 1,
                 }}
                 onPress={handleBack}>
-                <Icon name='arrow-back' size={25}/>
+                <Icon name="arrow-back" size={25} />
               </TouchableOpacity>
-              <TextInput
-                placeholder="First Name"
-                value={firstName}
-                onChangeText={text => setFirstName(text)}
+              <View
                 style={{
-                  borderWidth: 0.5,
-                  marginHorizontal: 10,
-                  marginVertical: 10,
-                  borderRadius: 10,
-                }}
-              />
-              <TextInput
-                placeholder="Last Name"
-                value={lastName}
-                onChangeText={text => setLastName(text)}
-                style={{
-                  borderWidth: 0.5,
-                  marginHorizontal: 10,
-                  marginVertical: 10,
-                  borderRadius: 10,
-                }}
-              />
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                <TextInput
+                  placeholder="First Name"
+                  value={firstName}
+                  onChangeText={text => setFirstName(text)}
+                  style={{
+                    borderWidth: 0.5,
+                    marginHorizontal: 10,
+                    marginVertical: 10,
+                    borderRadius: 10,
+                    width: '44%'
+                  }}
+                />
+                <TextInput
+                  placeholder="Last Name"
+                  value={lastName}
+                  onChangeText={text => setLastName(text)}
+                  style={{
+                    borderWidth: 0.5,
+                    marginHorizontal: 10,
+                    marginVertical: 10,
+                    borderRadius: 10,
+                    width: '44%'
+                  }}
+                />
+              </View>
               <TextInput
                 placeholder="Address"
                 value={address}
                 onChangeText={text => setAddress(text)}
+                style={{
+                  borderWidth: 0.5,
+                  marginHorizontal: 10,
+                  marginVertical: 10,
+                  borderRadius: 10,
+                }}
+              />
+              <TextInput
+                placeholder="Email"
+                value={email}
+                onChangeText={text => setEmail(text)}
+                style={{
+                  borderWidth: 0.5,
+                  marginHorizontal: 10,
+                  marginVertical: 10,
+                  borderRadius: 10,
+                }}
+              />
+              <TextInput
+                placeholder="Phone"
+                value={phone}
+                onChangeText={text => setPhone(text)}
+                style={{
+                  borderWidth: 0.5,
+                  marginHorizontal: 10,
+                  marginVertical: 10,
+                  borderRadius: 10,
+                }}
+              />
+              <TextInput
+                placeholder="Avatar"
+                value={avatar}
+                onChangeText={text => setAvatar(text)}
                 style={{
                   borderWidth: 0.5,
                   marginHorizontal: 10,
