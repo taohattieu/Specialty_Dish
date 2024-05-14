@@ -39,8 +39,9 @@ const Login = () => {
       );
       const account_id = String(response.data.account_id);
       await AsyncStorage.setItem('account_id', account_id);
-      console.log(account_id);
+      // console.log(account_id);
       await AsyncStorage.setItem('userToken', response.data.accessToken);
+      // console.log(response.data)
       navigation.navigate('AppDashboard');
     } catch (error) {
       // console.error(error);
