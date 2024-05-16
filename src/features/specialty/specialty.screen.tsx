@@ -1,122 +1,81 @@
-import React, { useEffect, useState } from 'react';
-import {
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View,
-  Image,
-  AsyncStorage,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {FlatList, Text, TouchableOpacity, View, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import {useNavigation, useRoute, RouteProp} from '@react-navigation/native';
 import axios from 'axios';
+
+type RouteParams = {
+  provinceName: string;
+  province_id: string;
+};
 
 const Specialty = () => {
   const navigation = useNavigation<any>();
-  const route = useRoute();
+  const route = useRoute<RouteProp<{params: RouteParams}, 'params'>>();
   const [specialties, setSpecialties] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState('');
-  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    const params = route.params;
-    const provinceName = params?.provinceName ?? '';
+    const provinceName = route.params?.provinceName ?? '';
     setSelectedProvince(provinceName);
+
     const fetchSpecialties = async () => {
       try {
         const specialtiesResponse = await axios.get(
-          'https://zgnj25mm-8080.asse.devtunnels.ms/specialty'
+          'https://zgnj25mm-8080.asse.devtunnels.ms/specialty',
         );
-        setSpecialties(specialtiesResponse.data);
+
+        const filteredSpecialties = specialtiesResponse.data.filter(
+          (specialty: any) =>
+            specialty.province_id === route.params.province_id,
+        );
+
+        setSpecialties(filteredSpecialties);
       } catch (error) {
         console.error('Error fetching specialties:', error);
       }
     };
+
     fetchSpecialties();
-    // Load favorites from storage
-    loadFavorites();
-  }, [navigation]);
+  }, [route.params]);
 
-  const loadFavorites = async () => {
-    try {
-      const favoritesString = await AsyncStorage.getItem('favorites');
-      if (favoritesString !== null) {
-        setFavorites(JSON.parse(favoritesString));
-      }
-    } catch (error) {
-      console.error('Error loading favorites:', error);
-    }
-  };
-
-  const saveFavorites = async () => {
-    try {
-      await AsyncStorage.setItem('favorites', JSON.stringify(favorites));
-    } catch (error) {
-      console.error('Error saving favorites:', error);
-    }
-  };
-
-  const toggleFavorite = (item: any) => {
-    const index = favorites.findIndex((fav) => fav.id === item.id);
-    if (index !== -1) {
-      // If already favorited, remove it
-      const updatedFavorites = [...favorites];
-      updatedFavorites.splice(index, 1);
-      setFavorites(updatedFavorites);
-    } else {
-      // Otherwise, add it to favorites
-      setFavorites([...favorites, item]);
-    }
-  };
-
-  const isFavorite = (item) => {
-    return favorites.some((fav) => fav.id === item.id);
-  };
-
-  const renderSpecialtyItem = ({ item }) => (
-    <TouchableOpacity
-      style={{ marginVertical: 8 }}
-      onPress={() =>
-        navigation.navigate('DetailsSpecialty', { specialty: item })
-      }>
-      <View
+  const renderSpecialtyItem = ({item}: {item: any}) => (
+    <View
+      style={{
+        backgroundColor: '#fff',
+        flexDirection: 'row',
+        borderRadius: 5,
+        marginVertical: 8,
+      }}>
+      <Image
+        source={{uri: item.image}}
         style={{
-          backgroundColor: '#fff',
-          flexDirection: 'row',
-          borderRadius: 5,
-        }}>
-        <Image
-          source={{ uri: item.image }}
-          style={{
-            width: '30%',
-            height: 100,
-            marginHorizontal: 8,
-            marginVertical: 8,
-            borderRadius: 8,
-          }}
-        />
-        <View style={{ justifyContent: 'space-evenly', marginLeft: 16 }}>
-          <Text style={{ color: '#696969' }}>Name: {item.name}</Text>
-          <Text style={{ color: '#696969' }}>Origin: {item.origin}</Text>
-          <Text style={{ color: '#696969' }}>
-            Description: {item.description}
-          </Text>
-          <TouchableOpacity onPress={() => toggleFavorite(item)}>
-            <Icon
-              name={isFavorite(item) ? 'heart' : 'hearto'}
-              size={24}
-              color={isFavorite(item) ? '#f00' : '#696969'}
-            />
+          width: '30%',
+          height: 100,
+          marginHorizontal: 8,
+          marginVertical: 8,
+          borderRadius: 8,
+        }}
+      />
+      <View
+        style={{justifyContent: 'space-evenly', marginLeft: 16, width: '50%'}}>
+        <Text style={{color: '#000000'}}>{item.name}</Text>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('DetailsSpecialty', {
+                specialty: item,
+                specialtyName: item.name,
+              })
+            }>
+            <Text style={{fontStyle: 'italic', color: 'blue'}}>Chi tiết</Text>
           </TouchableOpacity>
+
+          <Text style={{}}>Nút yêu thích</Text>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
-
-  // Call saveFavorites whenever favorites change
-  useEffect(() => {
-    saveFavorites();
-  }, [favorites]);
 
   return (
     <>
@@ -144,14 +103,15 @@ const Specialty = () => {
             marginVertical: 10,
             position: 'absolute',
           }}>
-          <Icon name="left" size={26} style={{ color: '#f00' }} />
+          <Icon name="left" size={26} style={{color: '#f00'}} />
         </TouchableOpacity>
       </View>
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         <FlatList
           data={specialties}
           renderItem={renderSpecialtyItem}
-          contentContainerStyle={{ marginHorizontal: 25, marginVertical: 10 }}
+          keyExtractor={(item, index) => index.toString()}
+          contentContainerStyle={{marginHorizontal: 25, marginVertical: 10}}
         />
       </View>
     </>

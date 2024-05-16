@@ -1,148 +1,146 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   Image,
   ScrollView,
-  FlatList,
+  ActivityIndicator,
   Dimensions,
-  TextInput,
+  TouchableOpacity,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/EvilIcons';
+import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import axios from 'axios';
+import {useNavigation} from '@react-navigation/native';
 
-const HomeScreen = () => {
-  const navigation: any = useNavigation();
-  const [provinces, setProvinces] = useState<Array<{id: number; name: string}>>(
-    [],
-  );
-  const [searchProvinces, setSearchProvinces] = useState('');
-  const [filteredProvinces, setFilteredProvinces] = useState<
-    Array<{id: number; name: string}>
-  >([]);
-  const windowWidth = Dimensions.get('window').width;
+type Region = {
+  regions_id: string;
+  name: string;
+};
+
+type Province = {
+  province_id: string;
+  name: string;
+  regions_id: string;
+  image: string;
+};
+
+const initialLayout = {width: Dimensions.get('window').width};
+
+const HomeScreen: React.FC = () => {
+  const navigation = useNavigation<any>();
+  const [regionsData, setRegionsData] = useState<Region[]>([]);
+  const [provincesData, setProvincesData] = useState<Province[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    {key: 'mienBac', title: 'Miền Bắc'},
+    {key: 'mienTrung', title: 'Miền Trung'},
+    {key: 'mienNam', title: 'Miền Nam'},
+  ]);
 
   useEffect(() => {
-    const fetchProvinces = async () => {
+    const fetchRegionsAndProvinces = async () => {
       try {
-        const response = await axios.get('https://zgnj25mm-8080.asse.devtunnels.ms/province');
-        setProvinces(response.data);
+        const regionsResponse = await axios.get(
+          'https://zgnj25mm-8080.asse.devtunnels.ms/regions',
+        );
+        setRegionsData(regionsResponse.data);
+
+        const provincesResponse = await axios.get(
+          'https://zgnj25mm-8080.asse.devtunnels.ms/province',
+        );
+        setProvincesData(provincesResponse.data);
       } catch (error) {
-        console.error('Error fetching provinces:', error);
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchProvinces();
+    fetchRegionsAndProvinces();
   }, []);
 
-  const calculateItemSize = () => {
-    const columns = 2;
-    const itemSize = (windowWidth - 100) / columns;
-    return itemSize;
-  };
-
-  const handleSearch = (query: string) => {
-    setSearchProvinces(query);
-    const filtered = provinces.filter(province =>
-      province.name.toLowerCase().includes(query.toLowerCase()),
-    );
-    setFilteredProvinces(filtered);
-  };
-
-  const renderProvinceItem = ({item}: any) => (
-    <TouchableOpacity
-      style={{marginBottom: 20}}
-      onPress={() => {
-        // navigation.navigate('Specialty');
-        navigation.navigate('Specialty', {provinceName: item.name});
-      }}>
-      <View
-        style={{
-          borderWidth: 2,
-          borderRadius: 10,
-          borderColor: 'red',
-          marginLeft: 15,
-        }}>
-        <Image
-          source={{uri: item.image}}
-          style={{
-            width: calculateItemSize(),
-            height: calculateItemSize(),
-            borderRadius: 8,
-          }}
-        />
+  if (loading) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size="large" color="#0000ff" />
       </View>
-      {/* <Text>{item.id}</Text> */}
-      <Text
-        style={{
-          textAlign: 'center',
-          marginVertical: 10,
-          color: 'black',
-          fontSize: 16,
-        }}>
-        {item.name}
-      </Text>
-    </TouchableOpacity>
-  );
+    );
+  }
+
+  const renderProvinceList = (regionId: string) => {
+    const screenWidth = Dimensions.get('window').width;
+    const itemWidth = screenWidth / 2 - 35;
+
+    return (
+      <ScrollView style={{flex: 1, backgroundColor: '#fce7a8'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+          }}>
+          {provincesData
+            .filter(province => province.regions_id === regionId)
+            .map(province => (
+              <View
+                key={province.province_id}
+                style={{width: itemWidth, alignItems: 'center', marginTop: 20}}>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('Specialty', {
+                      provinceName: province.name,
+                      province_id: province.province_id,
+                    })
+                  }>
+                  <Image
+                    source={{uri: province.image}}
+                    style={{
+                      width: itemWidth,
+                      height: itemWidth,
+                      borderRadius: 10,
+                      borderWidth: 2,
+                      borderColor: 'red',
+                    }}
+                  />
+                  <Text
+                    style={{
+                      marginVertical: 10,
+                      fontSize: 16,
+                      textAlign: 'center',
+                      color: 'black',
+                    }}>
+                    {province.name}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ))}
+        </View>
+      </ScrollView>
+    );
+  };
+
+  const renderScene = SceneMap({
+    mienBac: () => renderProvinceList('19d96eb7-0c99-4395-b4bb-23091412e00d'),
+    mienTrung: () => renderProvinceList('cbe91f2c-c4e3-4c66-be83-b2bf20ec6779'),
+    mienNam: () => renderProvinceList('d3ce4c07-84a0-4a60-b347-7821f08d219b'),
+  });
 
   return (
-    <View style={{flex: 1, backgroundColor: '#fce7a8'}}>
-      <View style={{justifyContent: 'center'}}>
-        <Text
-          style={{
-            textAlign: 'center',
-            fontSize: 25,
-            color: '#090',
-            fontStyle: 'italic',
-            top: 10,
-            fontVariant: ['small-caps'],
-            fontWeight: 'bold',
-          }}>
-          Specialty Dishes in Viet Nam
-        </Text>
-        <Text style={{textAlign: 'center', marginTop: 20, color: '#696969'}}>
-          Search or Select in province
-        </Text>
-      </View>
-      <View
-        style={{
-          borderRadius: 10,
-          borderWidth: 1,
-          marginHorizontal: 10,
-          marginVertical: 10,
-          backgroundColor: '#fff',
-        }}>
-        <View style={{flexDirection: 'row', height: 50}}>
-          <Icon
-            name="search"
-            size={30}
-            color="red"
-            style={{marginLeft: 8, top: 10}}
+    <View style={{flex: 1}}>
+      <TabView
+        navigationState={{index, routes}}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={initialLayout}
+        renderTabBar={props => (
+          <TabBar
+            {...props}
+            indicatorStyle={{backgroundColor: 'red'}}
+            style={{backgroundColor: 'white'}}
+            labelStyle={{color: 'black', fontWeight: 'bold'}}
           />
-          <TextInput
-            placeholder="Enter to Search"
-            placeholderTextColor={'#696969'}
-            style={{
-              height: 40,
-              width: '80%',
-              marginHorizontal: 10,
-              marginVertical: 8,
-              backgroundColor: '#fff',
-              color: '#f00',
-              fontSize: 18,
-            }}
-            onChangeText={handleSearch}
-          />
-        </View>
-      </View>
-      <FlatList
-        data={filteredProvinces.length > 0 ? filteredProvinces : provinces}
-        // keyExtractor={item => item.id.toString()}
-        numColumns={2}
-        renderItem={renderProvinceItem}
-        contentContainerStyle={{marginHorizontal: 25, marginVertical: 10}}
+        )}
       />
     </View>
   );
