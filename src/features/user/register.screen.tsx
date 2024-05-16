@@ -23,6 +23,7 @@ const Register = () => {
   const [lastName, setLastName] = useState('');
   const [address, setAddress] = useState('');
   const [avatar, setAvatar] = useState('');
+  const [coverImage, setCoverImage] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [showPersonalInfo, setShowPersonalInfo] = useState(false);
@@ -57,6 +58,7 @@ const Register = () => {
             lastName: lastName,
             address: address,
             avatar: avatar,
+            coverImage: coverImage,
             email: email,
             phone: phone,
           },
@@ -239,6 +241,18 @@ const Register = () => {
                 placeholder="Avatar"
                 value={avatar}
                 onChangeText={text => setAvatar(text)}
+                style={{
+                  borderWidth: 0.5,
+                  marginHorizontal: 10,
+                  marginVertical: 10,
+                  borderRadius: 10,
+                }}
+              />
+
+              <TextInput
+                placeholder="Cover Image"
+                value={coverImage}
+                onChangeText={text => setCoverImage(text)}
                 style={{
                   borderWidth: 0.5,
                   marginHorizontal: 10,
