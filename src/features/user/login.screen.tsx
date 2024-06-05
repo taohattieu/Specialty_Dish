@@ -170,11 +170,16 @@ const Login = () => {
                 marginHorizontal: 10,
                 justifyContent: 'flex-end',
               }}>
-                <TouchableOpacity onPress={() => navigation.navigate('AppDashboard')}>
+              {/* <TouchableOpacity
+                onPress={() => navigation.navigate('AppDashboard')}
+                >
+                <Text style={{fontSize: 18, fontStyle: 'italic'}}>
+                  Bạn chưa có tài khoản?{' '}
+                </Text>
+              </TouchableOpacity> */}
               <Text style={{fontSize: 18, fontStyle: 'italic'}}>
-                Bạn chưa có tài khoản?{' '}
-              </Text>
-              </TouchableOpacity>
+                  Bạn chưa có tài khoản?{' '}
+                </Text>
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate('Register');

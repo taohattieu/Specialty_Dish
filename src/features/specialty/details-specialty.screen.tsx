@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Icon1 from 'react-native-vector-icons/FontAwesome6';
 import {useNavigation} from '@react-navigation/native';
 
 interface SpecialtyDetails {
@@ -14,7 +15,7 @@ interface SpecialtyDetails {
 
 const DetailsSpecialty = ({route}: {route: any}) => {
   const {specialty} = route.params;
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   const [specialtyDetails, setSpecialtyDetails] =
     useState<SpecialtyDetails | null>(null);
@@ -44,6 +45,7 @@ const DetailsSpecialty = ({route}: {route: any}) => {
         <Text style={{fontSize: 24, textAlign: 'center', color: '#f00'}}>
           {specialty.name}
         </Text>
+
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={{
@@ -52,6 +54,19 @@ const DetailsSpecialty = ({route}: {route: any}) => {
             marginVertical: 10,
           }}>
           <Icon name="left" size={26} style={{color: '#f00'}} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate('HomeScreen')}
+          style={{
+            position: 'absolute',
+            alignSelf: 'flex-end',
+          }}>
+          <Icon1
+            name="house"
+            size={22}
+            style={{color: '#f00', marginHorizontal: 14}}
+          />
         </TouchableOpacity>
       </View>
       <ScrollView
@@ -83,7 +98,7 @@ const DetailsSpecialty = ({route}: {route: any}) => {
                   color: '#333333',
                   textAlign: 'center',
                 }}>
-                {specialtyDetails.name} - Đặc sản tỉnh {specialtyDetails.origin}
+                {specialtyDetails.name} - Đặc sản của {specialtyDetails.origin}
               </Text>
             </View>
             <View
@@ -109,7 +124,7 @@ const DetailsSpecialty = ({route}: {route: any}) => {
                   fontSize: 16,
                   marginHorizontal: 10,
                   marginVertical: 10,
-                  color: 'red',
+                  color: '#333',
                 }}>
                 {specialtyDetails.ingredient}
               </Text>
@@ -135,7 +150,7 @@ const DetailsSpecialty = ({route}: {route: any}) => {
                 style={{
                   fontSize: 16,
                   marginBottom: 10,
-                  color: 'red',
+                  color: '#333',
                   marginHorizontal: 10,
                   marginVertical: 10,
                 }}>
