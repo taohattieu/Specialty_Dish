@@ -30,21 +30,25 @@ const Register = () => {
   const [showUsernamePassword, setShowUsernamePassword] = useState(true);
 
   const validateUsername = (username: string) => {
-    return username.trim() !== '';
+    return username.trim().length >= 6;
+  };
+
+  const validatePassword = (password: string) => {
+    return password.trim().length >= 6;
   };
 
   const handleRegister = async () => {
     if (showUsernamePassword) {
       if (!validateUsername(username)) {
-        Alert.alert('Thông báo', 'Tên đăng nhập không được để trống');
+        Alert.alert('Thông báo', 'Tên đăng nhập phải có ít nhất 6 ký tự!');
         return;
       }
-
-      if (password.trim() === '') {
-        Alert.alert('Thông báo', 'Password không được để trống!');
+  
+      if (!validatePassword(password)) {
+        Alert.alert('Thông báo', 'Password phải có ít nhất 6 ký tự');
         return;
       }
-
+  
       setShowUsernamePassword(false);
       setShowPersonalInfo(true);
     } else {
@@ -71,12 +75,24 @@ const Register = () => {
         console.log(response.data);
         navigation.navigate('Login');
         Alert.alert('Thông báo', 'Đăng ký thành công!');
-      } catch (error) {
-        Alert.alert('Thông báo', 'Tên đăng nhập đã tồn tại!');
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          // Lỗi từ phía server
+          console.log(error.response?.data);
+          Alert.alert('Thông báo', error.response?.data.message || 'Tên đăng nhập đã tồn tại!');
+        } else if (error instanceof Error) {
+          // Các lỗi khác
+          console.log('Error', error.message);
+          Alert.alert('Thông báo', 'Đã có lỗi xảy ra!');
+        } else {
+          console.log('Unexpected error', error);
+          Alert.alert('Thông báo', 'Đã có lỗi xảy ra!');
+        }
       }
     }
   };
-
+  
+  
   const handleBack = () => {
     setShowPersonalInfo(false);
     setShowUsernamePassword(true);

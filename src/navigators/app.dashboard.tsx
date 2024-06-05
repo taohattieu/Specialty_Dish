@@ -41,7 +41,7 @@ const AppDashboard = () => {
             tabBarColor: '#e70',
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="CommunityScreen"
           component={CommunityScreen}
           options={{
@@ -57,7 +57,7 @@ const AppDashboard = () => {
             },
             tabBarColor: '#f0f',
           }}
-        />
+        /> */}
         <Tab.Screen
           name="favorites"
           component={FavoritesScreen}

@@ -17,12 +17,12 @@ const Profile = () => {
   const [coverImage, setCoverImage] = useState('');
 
   interface UserInfo {
-    displayName: string;
-    address: string;
-    email: string;
-    phone: string;
-    avatar: string;
-    coverImage: string;
+    displayName?: string;
+    address?: string;
+    email?: string;
+    phone?: string;
+    avatar?: string;
+    coverImage?: string;
   }
 
   const [userInfo, setUserInfo] = useState<UserInfo>({
