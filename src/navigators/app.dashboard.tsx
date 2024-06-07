@@ -21,6 +21,7 @@ const AppDashboard = () => {
         activeColor="#f00"
         inactiveColor="blue"
         // style={{ backgroundColor: 'tomato' }}
+        initialRouteName="Specialty"
 
         barStyle={
           {
@@ -59,7 +60,7 @@ const AppDashboard = () => {
           }}
         /> */}
         <Tab.Screen
-          name="favorites"
+          name="Favorites"
           component={FavoritesScreen}
           options={{
             tabBarLabel: 'Yêu thích', 

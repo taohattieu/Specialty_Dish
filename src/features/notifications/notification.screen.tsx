@@ -24,7 +24,7 @@ const NotificationScreen: React.FC = () => {
         // Lấy token xác thực từ AsyncStorage
         const token = await AsyncStorage.getItem('userToken');
         // Lấy thông tin về tài khoản đăng nhập
-        const account_id = await AsyncStorage.getItem('account_id'); // Ví dụ: userId là ID của tài khoản hiện đang đăng nhập
+        const account_id = await AsyncStorage.getItem('account_id'); 
         // Tạo các tham số truy vấn để gửi thông tin về tài khoản đến máy chủ
         const params = {
           account_id: account_id,
@@ -104,7 +104,7 @@ const NotificationScreen: React.FC = () => {
         />
       ) : (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text>No notification yet</Text>
+          <Text>Không có thông báo nào!</Text>
         </View>
       )}
     </View>

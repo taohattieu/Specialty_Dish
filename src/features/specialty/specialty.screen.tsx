@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   Text,
@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon1 from 'react-native-vector-icons/FontAwesome6';
-import {useNavigation, useRoute, RouteProp} from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -20,11 +20,11 @@ interface Specialty {
   province_id: string;
 }
 
-type RouteParams = {provinceName: string; province_id: string};
+type RouteParams = { provinceName: string; province_id: string };
 
 const Specialty: React.FC = () => {
   const navigation = useNavigation<any>();
-  const route = useRoute<RouteProp<{params: RouteParams}, 'params'>>();
+  const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
   const [specialties, setSpecialties] = useState<Specialty[]>([]);
   const [selectedProvince, setSelectedProvince] = useState('');
   const [selectedSpecialties, setSelectedSpecialties] = useState<string[]>([]);
@@ -43,6 +43,9 @@ const Specialty: React.FC = () => {
             specialty.province_id === route.params.province_id,
         );
         setSpecialties(filteredSpecialties);
+
+        // Lưu specialties vào AsyncStorage
+        await AsyncStorage.setItem('specialties', JSON.stringify(filteredSpecialties));
 
         const savedFavoritesString = await AsyncStorage.getItem(
           'favoriteSpecialties',
@@ -64,30 +67,30 @@ const Specialty: React.FC = () => {
       const newFavorites = prevState.includes(specialty_id)
         ? prevState.filter(id => id !== specialty_id)
         : [...prevState, specialty_id];
+      // console.log('New favorites:', newFavorites);
       const selectedSpecialty = specialties.find(
         specialty => specialty.specialty_id === specialty_id,
       );
       AsyncStorage.setItem('favoriteSpecialties', JSON.stringify(newFavorites));
-  
-      if (newFavorites.includes(specialty_id) && selectedSpecialty) { // Thêm điều kiện selectedSpecialty
+
+      if (newFavorites.includes(specialty_id) && selectedSpecialty) {
         Alert.alert(
           'Thành công',
           `Bạn đã thêm đặc sản ${selectedSpecialty.name} vào danh sách yêu thích thành công!`,
-          [{text: 'OK', onPress: () => console.log('OK Pressed')}],
-          {cancelable: false},
+          [{ text: 'OK' }],
+          { cancelable: false },
         );
       }
-  
+
       return newFavorites;
     });
   };
-  
 
   const isSpecialtySelected = (specialty_id: string) => {
     return selectedSpecialties.includes(specialty_id);
   };
 
-  const renderSpecialtyItem = ({item}: {item: Specialty}) => (
+  const renderSpecialtyItem = ({ item }: { item: Specialty }) => (
     <View
       style={{
         backgroundColor: '#fff',
@@ -96,7 +99,7 @@ const Specialty: React.FC = () => {
         marginVertical: 8,
       }}>
       <Image
-        source={{uri: item.image}}
+        source={{ uri: item.image }}
         style={{
           width: '30%',
           height: 100,
@@ -106,9 +109,9 @@ const Specialty: React.FC = () => {
         }}
       />
       <View
-        style={{justifyContent: 'space-evenly', marginLeft: 16, width: '50%'}}>
-        <Text style={{color: '#000000'}}>{item.name}</Text>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        style={{ justifyContent: 'space-evenly', marginLeft: 16, width: '50%' }}>
+        <Text style={{ color: '#000000' }}>{item.name}</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate('DetailsSpecialty', {
@@ -116,7 +119,7 @@ const Specialty: React.FC = () => {
                 specialtyName: item.name,
               })
             }>
-            <Text style={{fontStyle: 'italic', color: 'blue'}}>Chi tiết</Text>
+            <Text style={{ fontStyle: 'italic', color: 'blue' }}>Chi tiết</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => toggleSpecialtySelection(item.specialty_id)}>
@@ -140,7 +143,7 @@ const Specialty: React.FC = () => {
           justifyContent: 'center',
           borderBottomWidth: 0.3,
         }}>
-        <Text style={{fontSize: 24, textAlign: 'center', color: '#f00'}}>
+        <Text style={{ fontSize: 24, textAlign: 'center', color: '#f00' }}>
           {selectedProvince}
         </Text>
         <TouchableOpacity
@@ -150,16 +153,30 @@ const Specialty: React.FC = () => {
             marginVertical: 10,
             position: 'absolute',
           }}>
-          <Icon name="left" size={26} style={{color: '#f00'}} />
+          <Icon name="left" size={26} style={{ color: '#f00' }} />
         </TouchableOpacity>
+
+        {/* <TouchableOpacity
+          onPress={() => navigation.navigate('Favorites', { specialties })}
+          style={{
+            position: 'absolute',
+            alignSelf: 'flex-end',
+          }}>
+          <Icon
+            name="heart"
+            size={22}
+            style={{color: '#f00', marginHorizontal: 16}}
+          />
+        </TouchableOpacity> */}
       </View>
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <FlatList
           data={specialties}
           renderItem={renderSpecialtyItem}
           keyExtractor={item => item.specialty_id.toString()}
-          contentContainerStyle={{marginHorizontal: 25, marginVertical: 10}}
+          contentContainerStyle={{ marginHorizontal: 25, marginVertical: 10 }}
         />
+        
       </View>
     </>
   );
