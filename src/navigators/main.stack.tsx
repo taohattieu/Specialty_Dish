@@ -9,6 +9,7 @@ import DetailsSpecialty from '../features/specialty/details-specialty.screen';
 import Login from '../features/user/login.screen';
 import Register from '../features/user/register.screen';
 import FavoritesScreen from '../features/favorites/favorites.screen';
+import InfoUser from '../features/user/edit-profile.screen';
 // import {NavigatorContainer} from '@react-navigation/native'
 
 const Stack = createNativeStackNavigator()
@@ -23,6 +24,7 @@ const MainStack = () => {
         <Stack.Screen name="DetailsSpecialty" component={DetailsSpecialty}/>
         <Stack.Screen name="Favorites" component={FavoritesScreen} />
         <Stack.Screen name="Profile" component={Profile}/>
+        <Stack.Screen name="EditProfile" component={InfoUser}/>
         <Stack.Screen name="Register" component={Register}/>
     </Stack.Navigator>
 

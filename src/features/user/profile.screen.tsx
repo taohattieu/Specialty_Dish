@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
+import Icon3 from 'react-native-vector-icons/FontAwesome5';
 import ImagePicker from 'react-native-image-crop-picker';
 import Modal from 'react-native-modal';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -43,11 +44,14 @@ const Profile = () => {
       }
       // console.log('Access Token:', accessToken);
 
-      const response = await axios.get('https://zgnj25mm-8080.asse.devtunnels.ms/profile/me', {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
+      const response = await axios.get(
+        'https://zgnj25mm-8080.asse.devtunnels.ms/profile/me',
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         },
-      });
+      );
 
       // console.log('Response data:', response.data);
 
@@ -112,15 +116,23 @@ const Profile = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flex: 0.7, borderBottomWidth: 0.7 }}>
+    <View style={{flex: 1}}>
+      <View style={{flex: 0.7, borderBottomWidth: 0.7}}>
         <TouchableOpacity onPress={handleImagePress}>
-          <Image source={{ uri: userInfo.coverImage }} style={{ width: '100%', height: '100%', opacity: 0.7 }} />
+          <Image
+            source={{uri: userInfo.coverImage}}
+            style={{width: '100%', height: '100%', opacity: 0.7}}
+          />
         </TouchableOpacity>
-        <View style={{ marginVertical: 80, position: 'absolute', alignSelf: 'center' }}>
+        <View
+          style={{
+            marginVertical: 80,
+            position: 'absolute',
+            alignSelf: 'center',
+          }}>
           <TouchableOpacity onPress={handleAvatarPress}>
             <Image
-              source={{ uri: userInfo.avatar }}
+              source={{uri: userInfo.avatar}}
               style={{
                 width: 100,
                 height: 100,
@@ -131,30 +143,51 @@ const Profile = () => {
               }}
             />
           </TouchableOpacity>
-          <Text style={{ color: '#000', textAlign: 'center', fontSize: 20 }}>Xin chào:</Text>
-          <Text style={{ color: '#000', textAlign: 'center', fontSize: 20 }}>{userInfo.displayName}</Text>
+          <Text style={{color: '#000', textAlign: 'center', fontSize: 20}}>
+            Xin chào:
+          </Text>
+          <Text style={{color: '#000', textAlign: 'center', fontSize: 20}}>
+            {userInfo.displayName}
+          </Text>
         </View>
       </View>
 
-      <View style={{ flex: 0.2, borderBottomWidth: 0.3 }}>
-        <View style={{ marginVertical: 16 }}>
-          <Text style={{ fontSize: 20, color: '#000', textAlign: 'center', fontWeight: 'bold' }}>
+      <View style={{flex: 0.2, borderBottomWidth: 0.3}}>
+        <View
+          style={{
+            marginVertical: 16,
+            justifyContent: 'center',
+          }}>
+          <Text
+            style={{
+              fontSize: 20,
+              color: '#000',
+              textAlign: 'center',
+              fontWeight: 'bold',
+            }}>
             Thông tin cá nhân
           </Text>
+          <View style={{position: 'absolute', alignSelf: 'flex-end'}}>
+            <TouchableOpacity
+              style={{marginHorizontal: 14}}
+              onPress={() => navigation.navigate('EditProfile')}>
+              <Icon3 name="user-edit" size={24} />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-      <View style={{ flex: 1 }}>
-        <View style={{ marginHorizontal: 14, marginVertical: 14 }}>
-          <Text style={{ fontSize: 18, color: '#000', marginVertical: 10 }}>
+      <View style={{flex: 1}}>
+        <View style={{marginHorizontal: 14, marginVertical: 14}}>
+          <Text style={{fontSize: 18, color: '#000', marginVertical: 10}}>
             Họ và tên: {userInfo.displayName}
           </Text>
-          <Text style={{ fontSize: 18, color: '#000', marginVertical: 10 }}>
+          <Text style={{fontSize: 18, color: '#000', marginVertical: 10}}>
             Địa chỉ: {userInfo.address}
           </Text>
-          <Text style={{ fontSize: 18, color: '#000', marginVertical: 10 }}>
+          <Text style={{fontSize: 18, color: '#000', marginVertical: 10}}>
             Email: {userInfo.email}
           </Text>
-          <Text style={{ fontSize: 18, color: '#000', marginVertical: 10 }}>
+          <Text style={{fontSize: 18, color: '#000', marginVertical: 10}}>
             Số điện thoại: {userInfo.phone}
           </Text>
         </View>
@@ -162,7 +195,7 @@ const Profile = () => {
 
       <View>
         <TouchableOpacity
-        onPress={handleLogout}
+          onPress={handleLogout}
           style={{
             backgroundColor: '#dddddd',
             height: 45,
@@ -170,7 +203,9 @@ const Profile = () => {
             marginHorizontal: 16,
             borderRadius: 10,
           }}>
-          <Text style={{ textAlign: 'center', fontSize: 20, color: '#000' }}>Đăng xuất</Text>
+          <Text style={{textAlign: 'center', fontSize: 20, color: '#000'}}>
+            Đăng xuất
+          </Text>
         </TouchableOpacity>
       </View>
       <Modal
@@ -204,7 +239,7 @@ const Profile = () => {
                 name="file-image-o"
                 size={24}
                 color={'#000'}
-                style={{ left: 5, marginTop: 15 }}
+                style={{left: 5, marginTop: 15}}
               />
               <Text
                 style={{
@@ -214,7 +249,9 @@ const Profile = () => {
                   marginTop: 15,
                   color: '#000',
                 }}>
-                {selectedType === 'avatar' ? 'Thay đổi ảnh đại diện' : 'Thay đổi ảnh bìa'}
+                {selectedType === 'avatar'
+                  ? 'Thay đổi ảnh đại diện'
+                  : 'Thay đổi ảnh bìa'}
               </Text>
             </TouchableOpacity>
 
